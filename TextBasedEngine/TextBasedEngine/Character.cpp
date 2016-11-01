@@ -19,22 +19,22 @@ Character::~Character()
 
 }
 
-Character::setHealth(health)
+void Character::setHealth(unsigned int health)
 {
 	Character::health = (health > 0) ? health : 30;
 }
 
-Character::setItemPouch(itemPouch)
+void Character::setItemPouch(unsigned int itemPouch)
 {
 	Character::itemPouch = (itemPouch > 0) ? itemPouch : 1;
 }
 
-Character::setWallet(wallet)
+void Character::setWallet(unsigned int wallet)
 {
 	Character::wallet = (wallet > 0) ? wallet : 10;
 }
 
-Character::setState(state)
+void Character::setState(bool state)
 {
 	Character::state = (state != false) ? state : true;
 }

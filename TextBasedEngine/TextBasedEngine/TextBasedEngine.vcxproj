@@ -134,9 +134,13 @@
     <ClInclude Include="Key.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="PlayerCharacter.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="Scenary.h" />
     <ClInclude Include="Weapon.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TextBasedEngine.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

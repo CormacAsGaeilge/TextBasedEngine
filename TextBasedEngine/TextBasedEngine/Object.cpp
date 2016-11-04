@@ -26,7 +26,7 @@ void Object::setId(unsigned int id)
 
 void Object::setName(std::string name)
 {
-	Object::name = (name.length() > 8) ? name : "default name";
+	Object::name = (name.length() > 3) ? name : "default name";
 }
 
 void Object::setDescription(std::string description)
@@ -36,5 +36,5 @@ void Object::setDescription(std::string description)
 
 void Object::print() 
 {
-	std::cout << "ID\t" << Object::getId() << "\nName\t" << Object::getName() << "\nDes\t" << Object::getDescription();
+	std::cout << "Name\t" << Object::getName() << "\nDes\t" << Object::getDescription();
 }

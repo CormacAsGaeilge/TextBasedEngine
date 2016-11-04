@@ -29,7 +29,7 @@ void Character::setHealth(unsigned int health)
 
 void Character::setItemPouch(std::vector<DynamicItem> itemPouch)
 {
-	
+	Character::itemPouch = itemPouch;
 }
 
 void Character::setWallet(unsigned int wallet)
@@ -52,9 +52,16 @@ void Character::print()
 void Character::printItemPouch()
 {
 	std::cout << "*****ITEM POUCH*****" << std::endl;
-	for (DynamicItem item : Character::itemPouch)
+	if (!Character::itemPouch.empty())
 	{
-		item.print();
+		for (DynamicItem item : Character::itemPouch)
+		{
+			item.print();
+		}
+	}
+	else
+	{
+		std::cout << "Empty Pouch" << std::endl;
 	}
 	std::cout << "********************" << std::endl;
 }

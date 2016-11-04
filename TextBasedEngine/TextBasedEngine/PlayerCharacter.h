@@ -4,7 +4,11 @@ class PlayerCharacter :
 	public InteractableCharacter
 {
 public:
-	PlayerCharacter();
+	PlayerCharacter(unsigned int id, std::string name, std::string description, unsigned int health, std::vector<DynamicItem> itemPouch, unsigned int wallet, bool state, DynamicItem equippedLeft, DynamicItem equippedRight);
 	~PlayerCharacter();
+
+	void print();
+private:
+
 };
 

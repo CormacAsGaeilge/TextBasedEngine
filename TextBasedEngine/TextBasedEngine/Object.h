@@ -14,6 +14,7 @@ public:
 	void setId(unsigned int id);
 	void setName(std::string name);
 	void setDescription(std::string description);
+	void print();
 
 private:
 	unsigned int id;

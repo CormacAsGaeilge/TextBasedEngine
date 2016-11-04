@@ -3,7 +3,7 @@
 class Scenary : public Object
 {
 public:
-	Scenary(std::string additionalDialogue, bool state);
+	Scenary(unsigned int id, std::string name, std::string description, std::string additionalDialogue, bool state);
 	Scenary();
 	~Scenary();
 

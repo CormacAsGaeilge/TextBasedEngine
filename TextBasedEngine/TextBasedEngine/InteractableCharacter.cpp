@@ -1,6 +1,7 @@
 #include "InteractableCharacter.h"
 
-InteractableCharacter::InteractableCharacter(bool equippedLeft, bool equippedRight)
+InteractableCharacter::InteractableCharacter(unsigned int id, std::string name, std::string description, unsigned int health, std::vector<DynamicItem> itemPouch, unsigned int wallet, bool state, DynamicItem equippedLeft, DynamicItem equippedRight)
+	: Character(id, name, description, health, itemPouch, wallet, state)
 {
 	setLeftEquip(equippedLeft);
 	setRightEquip(equippedRight);
@@ -16,12 +17,3 @@ InteractableCharacter::~InteractableCharacter()
 
 }
 
-void InteractableCharacter::setLeftEquip(bool equippedLeft)
-{
-	InteractableCharacter::equippedLeft = (equippedLeft != false) ? equippedLeft : true;
-}
-
-void InteractableCharacter::setRightEquip(bool equippedRight)
-{
-	InteractableCharacter::equippedRight = (equippedRight != false) ? equippedRight : true;
-}

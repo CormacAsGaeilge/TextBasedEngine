@@ -1,20 +1,21 @@
 #pragma once
 #include "Character.h"
+#include "DynamicItem.h"
 class InteractableCharacter : public Character
 {
 public:
 	InteractableCharacter();
-	InteractableCharacter(bool equippedLeft, bool equippedRight);
+	InteractableCharacter(unsigned int id, std::string name, std::string description, unsigned int health, std::vector<DynamicItem> itemPouch, unsigned int wallet, bool state, DynamicItem equippedLeft, DynamicItem equippedRight);
 	~InteractableCharacter();
 	
-	bool getLeftEquip() { return equippedLeft; }
-	bool getRightEquip() { return equippedRight; }
+	DynamicItem getLeftEquip() { return equippedLeft; }
+	DynamicItem getRightEquip() { return equippedRight; }
 
-	void setLeftEquip(bool equippedLeft);
-	void setRightEquip(bool equippedRight);
+	void setLeftEquip(DynamicItem equippedLeft) { InteractableCharacter::equippedLeft = equippedLeft; }
+	void setRightEquip(DynamicItem equippedRight) { InteractableCharacter::equippedRight = equippedRight; }
 
 private:
-	bool equippedLeft;
-	bool equippedRight;
+	DynamicItem equippedLeft;
+	DynamicItem equippedRight;
 };
 

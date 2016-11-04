@@ -1,6 +1,6 @@
 #include "Scenary.h"
 
-Scenary::Scenary(std::string additionalDialogue, bool state)
+Scenary::Scenary(unsigned int id, std::string name, std::string description, std::string additionalDialogue, bool state) : Object(id, name, description)
 {
 	setAdditionalDialogue(additionalDialogue);
 	setState(state);

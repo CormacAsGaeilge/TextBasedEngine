@@ -1,6 +1,9 @@
 #include "Character.h"
+#include <iostream>
+#include <string>
 
-Character::Character(unsigned int health, unsigned int itemPouch, unsigned int wallet, bool state)
+Character::Character(unsigned int id, std::string name, std::string description, unsigned int health, std::vector<DynamicItem> itemPouch, unsigned int wallet, bool state)
+	: Object(id, name, description)
 {
 	setHealth(health);
 	setItemPouch(itemPouch);
@@ -8,7 +11,7 @@ Character::Character(unsigned int health, unsigned int itemPouch, unsigned int w
 	setState(state);
 }
 
-Character::Character()
+Character::Character() : Object()
 {
 
 }
@@ -24,9 +27,9 @@ void Character::setHealth(unsigned int health)
 	Character::health = (health > 0) ? health : 30;
 }
 
-void Character::setItemPouch(unsigned int itemPouch)
+void Character::setItemPouch(std::vector<DynamicItem> itemPouch)
 {
-	Character::itemPouch = (itemPouch > 0) ? itemPouch : 1;
+	
 }
 
 void Character::setWallet(unsigned int wallet)
@@ -37,4 +40,21 @@ void Character::setWallet(unsigned int wallet)
 void Character::setState(bool state)
 {
 	Character::state = (state != false) ? state : true;
+}
+
+void Character::print()
+{
+	Object::print();
+	std::cout << "\nHealth\t" << Character::getHealth() << "\nWallet\t" << Character::getWallet() << "\nItemPouch\t";
+	Character::printItemPouch();
+
+}
+void Character::printItemPouch()
+{
+	std::cout << "*****ITEM POUCH*****" << std::endl;
+	for (DynamicItem item : Character::itemPouch)
+	{
+		item.print();
+	}
+	std::cout << "********************" << std::endl;
 }

@@ -1,6 +1,8 @@
 #include "Weapon.h"
-
-Weapon::Weapon(unsigned int attack, unsigned int defense)
+#include <iostream>
+#include <string>
+Weapon::Weapon(unsigned int id, std::string name, std::string description, unsigned int value, bool state, unsigned int uses, unsigned int attack, unsigned int defense)
+	: DynamicItem(id,name,description,value,state,uses)
 {
 	setAttack(attack);
 	setDefense(defense);
@@ -24,4 +26,9 @@ void Weapon::setAttack(unsigned int attack)
 void Weapon::setDefense(unsigned int defense)
 {
 	Weapon::defense = (defense > 0) ? defense : 10;
+}
+void Weapon::print()
+{
+	DynamicItem::print();
+	std::cout << "\nAttack\t" << Weapon::getAttack() << "\nDefense\t" << Weapon::getDefense() << std::endl;
 }

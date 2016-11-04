@@ -4,7 +4,7 @@
 class Weapon : public DynamicItem
 {
 public:
-	Weapon(unsigned int attack, unsigned int defense);
+	Weapon(unsigned int id, std::string name, std::string description, unsigned int value, bool state, unsigned int uses, unsigned int attack, unsigned int defense);
 	Weapon();
 	~Weapon();
 
@@ -13,7 +13,7 @@ public:
 
 	void setAttack(unsigned int attack);
 	void setDefense(unsigned int defense);
-
+	void print();
 private:
 	unsigned int attack;
 	unsigned int defense;

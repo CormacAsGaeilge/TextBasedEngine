@@ -1,5 +1,6 @@
 #include "Object.h"
-
+#include <iostream>
+#include <string>
 
 Object::Object(unsigned int id, std::string name, std::string description)
 {
@@ -31,4 +32,9 @@ void Object::setName(std::string name)
 void Object::setDescription(std::string description)
 {
 	Object::description = (description.length() > 8) ? description : "default description";
+}
+
+void Object::print() 
+{
+	std::cout << "ID\t" << Object::getId() << "\nName\t" << Object::getName() << "\nDes\t" << Object::getDescription();
 }

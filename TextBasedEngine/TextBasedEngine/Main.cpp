@@ -1,4 +1,7 @@
 #include <iostream>
+#include <memory>
+#include <vector>
+#include <string>
 
 #include "Object.h"
 
@@ -18,20 +21,29 @@
 
 using namespace std;
 
+unique_ptr<Weapon> createWeapon();
+unique_ptr<Consumable> createConsumable();
+
 int main()
 {
-	Weapon sword(1,"sword","a basic sword", 15, true, 50, 35, 4);
-	Weapon shield(2, "shield", "a basic shield", 10, true, 60, 2, 40);
-	Consumable healthPotion(101, "Potion of Healing", "Heals those who are ill", 5, true, 1, healthPotion, 20);
-	vector<DynamicItem> itemPouch;
-	itemPouch.push_back(healthPotion);
+	vector<unique_ptr<DynamicItem>> itemPouch;
+	itemPouch.push_back(createConsumable());
+	itemPouch.push_back(createWeapon());
 
+	Character npc(4,"NPC", "Hero of the game", 100,itemPouch,150,true);
 
-
-	PlayerCharacter hero(4,"Cormac", "Hero of the game", 100,itemPouch,150,true, shield, sword);
-
-	hero.print();
+	npc.print();
 
 	system("pause");
 	return 0;
+}
+
+unique_ptr<Consumable> createConsumable() 
+{
+	return std::make_unique<Consumable>(101, "Potion of Healing", "Heals those who are ill", 5, true, 1, healthPotion, 20);
+}
+
+unique_ptr<Weapon> createWeapon()
+{
+	return std::make_unique<Weapon>(1, "sword", "a basic sword", 15, true, 50, 35, 4);
 }

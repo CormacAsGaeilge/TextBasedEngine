@@ -1,6 +1,8 @@
 #include "EnemyCharacter.h"
 
-EnemyCharacter::EnemyCharacter(unsigned int id, std::string name, std::string description, unsigned int health, std::vector<DynamicItem> itemPouch, unsigned int wallet, bool state, DynamicItem equippedLeft, DynamicItem equippedRight, std::string additionalDialogue)
+EnemyCharacter::EnemyCharacter(unsigned int id, std::string name, std::string description, unsigned int health,
+	std::vector<std::unique_ptr<DynamicItem>> itemPouch, unsigned int wallet, bool state, DynamicItem equippedLeft,
+	DynamicItem equippedRight, std::string additionalDialogue)
 	: InteractableCharacter(id, name, description, health, itemPouch, wallet, state,equippedLeft,equippedRight)
 {
 	setAdditionalDialogue(additionalDialogue);

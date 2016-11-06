@@ -13,7 +13,7 @@ public:
 
 	void setAttack(unsigned int attack);
 	void setDefense(unsigned int defense);
-	void print();
+	void print() override;
 private:
 	unsigned int attack;
 	unsigned int defense;

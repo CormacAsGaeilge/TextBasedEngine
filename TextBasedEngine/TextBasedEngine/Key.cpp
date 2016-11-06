@@ -1,6 +1,7 @@
 #include "Key.h"
 
-Key::Key(unsigned int lockId)
+Key::Key(unsigned int id, std::string name, std::string description, unsigned int value, bool state, unsigned int uses, unsigned int lockId)
+	: DynamicItem(id,name,description,value,state,uses)
 {
 	setLockId(lockId);
 }

@@ -1,3 +1,88 @@
-﻿  Main.cpp
-  TextBasedEngine.vcxproj -> I:\Projects\TextBasedEngine\TextBasedEngine\Debug\TextBasedEngine.exe
-  TextBasedEngine.vcxproj -> I:\Projects\TextBasedEngine\TextBasedEngine\Debug\TextBasedEngine.pdb (Partial PDB)
+﻿  PlayerCharacter.cpp
+i:\projects\textbasedengine\textbasedengine\textbasedengine\character.h(8): error C2039: 'unique_ptr': is not a member of 'std'
+  i:\visual studios\vc\include\vector(17): note: see declaration of 'std'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\character.h(8): error C2065: 'unique_ptr': undeclared identifier
+i:\projects\textbasedengine\textbasedengine\textbasedengine\character.h(8): error C2275: 'DynamicItem': illegal use of this type as an expression
+  i:\projects\textbasedengine\textbasedengine\textbasedengine\dynamicitem.h(3): note: see declaration of 'DynamicItem'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\character.h(8): error C2974: 'std::vector': invalid template argument for '_Ty', type expected
+  i:\visual studios\vc\include\vector(679): note: see declaration of 'std::vector'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\character.h(8): error C3203: 'allocator': unspecialized class template can't be used as a template argument for template parameter '_Alloc', expected a real type
+i:\projects\textbasedengine\textbasedengine\textbasedengine\character.h(8): error C2143: syntax error: missing ')' before '>'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\character.h(8): error C2059: syntax error: '>'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\character.h(13): error C2039: 'unique_ptr': is not a member of 'std'
+  i:\visual studios\vc\include\vector(17): note: see declaration of 'std'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\character.h(13): error C2065: 'unique_ptr': undeclared identifier
+i:\projects\textbasedengine\textbasedengine\textbasedengine\character.h(13): error C2275: 'DynamicItem': illegal use of this type as an expression
+  i:\projects\textbasedengine\textbasedengine\textbasedengine\dynamicitem.h(3): note: see declaration of 'DynamicItem'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\character.h(13): error C2974: 'std::vector': invalid template argument for '_Ty', type expected
+  i:\visual studios\vc\include\vector(679): note: see declaration of 'std::vector'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\character.h(13): error C3203: 'allocator': unspecialized class template can't be used as a template argument for template parameter '_Alloc', expected a real type
+i:\projects\textbasedengine\textbasedengine\textbasedengine\character.h(13): error C2059: syntax error: '>'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\character.h(13): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+i:\projects\textbasedengine\textbasedengine\textbasedengine\character.h(18): error C2039: 'unique_ptr': is not a member of 'std'
+  i:\visual studios\vc\include\vector(17): note: see declaration of 'std'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\character.h(18): error C2065: 'unique_ptr': undeclared identifier
+i:\projects\textbasedengine\textbasedengine\textbasedengine\character.h(18): error C2275: 'DynamicItem': illegal use of this type as an expression
+  i:\projects\textbasedengine\textbasedengine\textbasedengine\dynamicitem.h(3): note: see declaration of 'DynamicItem'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\character.h(18): error C2974: 'std::vector': invalid template argument for '_Ty', type expected
+  i:\visual studios\vc\include\vector(679): note: see declaration of 'std::vector'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\character.h(18): error C3203: 'allocator': unspecialized class template can't be used as a template argument for template parameter '_Alloc', expected a real type
+i:\projects\textbasedengine\textbasedengine\textbasedengine\character.h(18): error C2143: syntax error: missing ')' before '>'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\character.h(18): error C2059: syntax error: '>'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\character.h(26): error C2039: 'unique_ptr': is not a member of 'std'
+  i:\visual studios\vc\include\vector(17): note: see declaration of 'std'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\character.h(26): error C2065: 'unique_ptr': undeclared identifier
+i:\projects\textbasedengine\textbasedengine\textbasedengine\character.h(26): error C2275: 'DynamicItem': illegal use of this type as an expression
+  i:\projects\textbasedengine\textbasedengine\textbasedengine\dynamicitem.h(3): note: see declaration of 'DynamicItem'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\character.h(26): error C2974: 'std::vector': invalid template argument for '_Ty', type expected
+  i:\visual studios\vc\include\vector(679): note: see declaration of 'std::vector'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\character.h(26): error C3203: 'allocator': unspecialized class template can't be used as a template argument for template parameter '_Alloc', expected a real type
+i:\projects\textbasedengine\textbasedengine\textbasedengine\character.h(26): error C2059: syntax error: '>'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\character.h(26): error C2238: unexpected token(s) preceding ';'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\interactablecharacter.h(8): error C2039: 'unique_ptr': is not a member of 'std'
+  i:\visual studios\vc\include\vector(17): note: see declaration of 'std'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\interactablecharacter.h(8): error C2065: 'unique_ptr': undeclared identifier
+i:\projects\textbasedengine\textbasedengine\textbasedengine\interactablecharacter.h(8): error C2275: 'DynamicItem': illegal use of this type as an expression
+  i:\projects\textbasedengine\textbasedengine\textbasedengine\dynamicitem.h(3): note: see declaration of 'DynamicItem'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\interactablecharacter.h(8): error C2974: 'std::vector': invalid template argument for '_Ty', type expected
+  i:\visual studios\vc\include\vector(679): note: see declaration of 'std::vector'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\interactablecharacter.h(8): error C3203: 'allocator': unspecialized class template can't be used as a template argument for template parameter '_Alloc', expected a real type
+i:\projects\textbasedengine\textbasedengine\textbasedengine\interactablecharacter.h(8): error C2143: syntax error: missing ')' before '>'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\interactablecharacter.h(8): error C2059: syntax error: '>'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\playercharacter.h(7): error C2039: 'unique_ptr': is not a member of 'std'
+  i:\visual studios\vc\include\vector(17): note: see declaration of 'std'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\playercharacter.h(7): error C2065: 'unique_ptr': undeclared identifier
+i:\projects\textbasedengine\textbasedengine\textbasedengine\playercharacter.h(7): error C2275: 'DynamicItem': illegal use of this type as an expression
+  i:\projects\textbasedengine\textbasedengine\textbasedengine\dynamicitem.h(3): note: see declaration of 'DynamicItem'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\playercharacter.h(7): error C2974: 'std::vector': invalid template argument for '_Ty', type expected
+  i:\visual studios\vc\include\vector(679): note: see declaration of 'std::vector'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\playercharacter.h(7): error C3203: 'allocator': unspecialized class template can't be used as a template argument for template parameter '_Alloc', expected a real type
+i:\projects\textbasedengine\textbasedengine\textbasedengine\playercharacter.h(7): error C2143: syntax error: missing ')' before '>'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\playercharacter.h(7): error C2059: syntax error: '>'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\playercharacter.cpp(6): error C2039: 'unique_ptr': is not a member of 'std'
+  i:\visual studios\vc\include\iostream(12): note: see declaration of 'std'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\playercharacter.cpp(6): error C2065: 'unique_ptr': undeclared identifier
+i:\projects\textbasedengine\textbasedengine\textbasedengine\playercharacter.cpp(6): error C2275: 'DynamicItem': illegal use of this type as an expression
+  i:\projects\textbasedengine\textbasedengine\textbasedengine\dynamicitem.h(3): note: see declaration of 'DynamicItem'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\playercharacter.cpp(6): error C2974: 'std::vector': invalid template argument for '_Ty', type expected
+  i:\visual studios\vc\include\vector(679): note: see declaration of 'std::vector'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\playercharacter.cpp(6): error C3203: 'allocator': unspecialized class template can't be used as a template argument for template parameter '_Alloc', expected a real type
+i:\projects\textbasedengine\textbasedengine\textbasedengine\playercharacter.cpp(6): error C2143: syntax error: missing ')' before '>'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\playercharacter.cpp(6): error C2059: syntax error: '>'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\playercharacter.cpp(6): error C2059: syntax error: ')'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\playercharacter.cpp(7): error C2143: syntax error: missing ')' before ','
+i:\projects\textbasedengine\textbasedengine\textbasedengine\playercharacter.cpp(7): error C2365: 'id': redefinition; previous definition was 'formal parameter'
+  i:\projects\textbasedengine\textbasedengine\textbasedengine\playercharacter.cpp(6): note: see declaration of 'id'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\playercharacter.cpp(7): error C2365: 'name': redefinition; previous definition was 'formal parameter'
+  i:\projects\textbasedengine\textbasedengine\textbasedengine\playercharacter.cpp(6): note: see declaration of 'name'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\playercharacter.cpp(7): error C2365: 'description': redefinition; previous definition was 'formal parameter'
+  i:\projects\textbasedengine\textbasedengine\textbasedengine\playercharacter.cpp(6): note: see declaration of 'description'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\playercharacter.cpp(7): error C2365: 'health': redefinition; previous definition was 'formal parameter'
+  i:\projects\textbasedengine\textbasedengine\textbasedengine\playercharacter.cpp(6): note: see declaration of 'health'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\playercharacter.cpp(7): error C2059: syntax error: ')'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\playercharacter.cpp(12): error C2143: syntax error: missing ';' before 'PlayerCharacter::~PlayerCharacter'
+i:\projects\textbasedengine\textbasedengine\textbasedengine\playercharacter.cpp(12): error C2751: 'PlayerCharacter::~PlayerCharacter': the name of a function parameter cannot be qualified
+i:\projects\textbasedengine\textbasedengine\textbasedengine\playercharacter.cpp(13): fatal error C1903: unable to recover from previous error(s); stopping compilation
+  INTERNAL COMPILER ERROR in 'I:\VISUAL STUDIOS\VC\bin\CL.exe'
+      Please choose the Technical Support command on the Visual C++
+      Help menu, or open the Technical Support help file for more information

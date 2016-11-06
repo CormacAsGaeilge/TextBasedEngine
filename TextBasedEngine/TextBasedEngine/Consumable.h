@@ -12,7 +12,7 @@ public:
 
 	void setConsumableType(ConsumableType consumableType);
 	void setEffectValue(int effectValue);
-	void print();
+	void print() override;
 private:
 	ConsumableType consumableType;
 	int effectValue;

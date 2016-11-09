@@ -3,7 +3,7 @@
 #include <memory>
 #include <string>
 
-Character::Character(unsigned int id, std::string name, std::string description, unsigned int health, std::vector<std::unique_ptr<DynamicItem>> itemPouch, unsigned int wallet, bool state)
+Character::Character(unsigned int id, std::string name, std::string description, unsigned int health, std::vector<DynamicItem*> itemPouch, unsigned int wallet, bool state)
 	: Object(id, name, description)
 {
 	setHealth(health);
@@ -28,7 +28,7 @@ void Character::setHealth(unsigned int health)
 	Character::health = (health > 0) ? health : 30;
 }
 
-void Character::setItemPouch(std::vector<std::unique_ptr<DynamicItem>> itemPouch)
+void Character::setItemPouch(std::vector<DynamicItem*> itemPouch)
 {
 	Character::itemPouch = itemPouch;
 }

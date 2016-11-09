@@ -21,12 +21,12 @@
 
 using namespace std;
 
-unique_ptr<Weapon> createWeapon();
-unique_ptr<Consumable> createConsumable();
+Weapon* createWeapon();
+Consumable* createConsumable();
 
 int main()
 {
-	vector<unique_ptr<DynamicItem>> itemPouch;
+	vector<DynamicItem*> itemPouch;
 	itemPouch.push_back(createConsumable());
 	itemPouch.push_back(createWeapon());
 
@@ -38,12 +38,12 @@ int main()
 	return 0;
 }
 
-unique_ptr<Consumable> createConsumable() 
+Consumable* createConsumable() 
 {
-	return std::make_unique<Consumable>(101, "Potion of Healing", "Heals those who are ill", 5, true, 1, healthPotion, 20);
+	return new Consumable(101, "Potion of Healing", "Heals those who are ill", 5, true, 1, healthPotion, 20);
 }
 
-unique_ptr<Weapon> createWeapon()
+Weapon* createWeapon()
 {
-	return std::make_unique<Weapon>(1, "sword", "a basic sword", 15, true, 50, 35, 4);
+	return new Weapon(1, "sword", "a basic sword", 15, true, 50, 35, 4);
 }

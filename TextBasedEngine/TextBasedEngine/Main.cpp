@@ -2,6 +2,7 @@
 #include <memory>
 #include <vector>
 #include <string>
+#include <fstream>
 
 #include "Object.h"
 
@@ -23,10 +24,12 @@ using namespace std;
 
 Weapon* createWeapon();
 Consumable* createConsumable();
+void loadRoomFromFile();
 
 int main()
 {
-	vector<DynamicItem*> itemPouch;
+	loadRoomFromFile();
+	/*vector<DynamicItem*> itemPouch;
 	Weapon sword(1, "sword", "a basic sword", 15, true, 50, 35, 4);
 	Weapon shield(1, "shield", "a basic shield", 15, true, 50, 4, 40);
 	PlayerCharacter player(1,"Player", "Hero of the game", 100, itemPouch, 150, true,sword,shield);
@@ -48,7 +51,7 @@ int main()
 
 	vector<ConnectedRoom> connectedRooms;
 
-	Room house(5, "House", "Starting House", items, characters, scenary, connectedRooms);
+	Room house(5, "House", "Starting House", items, characters, scenary, connectedRooms);*/
 
 	system("pause");
 	return 0;
@@ -62,4 +65,32 @@ Consumable* createConsumable()
 Weapon* createWeapon()
 {
 	return new Weapon(1, "sword", "a basic sword", 15, true, 50, 35, 4);
+}
+
+void loadRoomFromFile()
+{
+	ifstream inFile;
+	inFile.open("c:/temp/banterRoom.txt");
+
+	int id;
+	string name;
+	string description;
+	std::vector<DynamicItem*> item;
+	std::vector<InteractableCharacter*> iChar;
+	std::vector<Scenary*> scene;
+	std::vector<ConnectedRoom> cRoom;
+
+
+	while (!inFile.eof())
+	{
+		inFile >> id;
+		inFile >> name;
+		inFile >> description;
+	}
+
+	Room room(id, name, description, item, iChar, scene, cRoom);
+
+	room.print();
+
+	inFile.close();
 }

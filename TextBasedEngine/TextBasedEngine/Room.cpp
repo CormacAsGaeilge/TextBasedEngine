@@ -45,7 +45,10 @@ void Room::setConnectedRooms(vector<ConnectedRoom> connectedRooms)
 
 void Room::print()
 {
-	cout << "***************Start of Room***************\nName:\t" << Room::getName() << "\n\nItems in Room:" << endl; 
+	cout << "***************Start of Room***************\nName:\t" << Room::getName() << endl;
+	cout << "Room Description:\n";
+	cout << Object::getDescription() << endl;
+	cout << "\n\nItems in Room:" << endl;
 	Room::printItems();
 	cout<< "\n\nScenary in Room:\n";
 	Room::printScenary();
@@ -62,6 +65,7 @@ void Room::printItems()
 		ptr->print();
 }
 
+
 void Room::printScenary()
 {
 	for (Scenary* ptr : Room::getScenary())
@@ -77,5 +81,5 @@ void Room::printCharacters()
 void Room::printConnectedRooms()
 {
 	for (ConnectedRoom room : Room::getConnectedRooms())
-		cout << "Connected Room:\t" << room.getRoomId << endl;
+		cout << "Connected Room:\t" << room.getRoomId() << endl;
 }

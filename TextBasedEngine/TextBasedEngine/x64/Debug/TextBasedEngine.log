@@ -1,2 +1,10 @@
-﻿  TextBasedEngine.vcxproj -> E:\Projects\TextBasedEngine\TextBasedEngine\x64\Debug\TextBasedEngine.exe
-  TextBasedEngine.vcxproj -> E:\Projects\TextBasedEngine\TextBasedEngine\x64\Debug\TextBasedEngine.pdb (Partial PDB)
+﻿  Room.cpp
+e:\projects\textbasedengine\textbasedengine\textbasedengine\room.cpp(80): error C3867: 'ConnectedRoom::getRoomId': non-standard syntax; use '&' to create a pointer to member
+  Main.cpp
+  ConnectedRoom.cpp
+e:\projects\textbasedengine\textbasedengine\textbasedengine\connectedroom.cpp(6): error C2511: 'ConnectedRoom::ConnectedRoom(void)': overloaded member function not found in 'ConnectedRoom'
+  e:\projects\textbasedengine\textbasedengine\textbasedengine\connectedroom.h(4): note: see declaration of 'ConnectedRoom'
+  Character.cpp
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  ConsumableType.h

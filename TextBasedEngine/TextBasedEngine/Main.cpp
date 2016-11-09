@@ -27,12 +27,28 @@ Consumable* createConsumable();
 int main()
 {
 	vector<DynamicItem*> itemPouch;
-	itemPouch.push_back(createConsumable());
-	itemPouch.push_back(createWeapon());
+	Weapon sword(1, "sword", "a basic sword", 15, true, 50, 35, 4);
+	Weapon shield(1, "shield", "a basic shield", 15, true, 50, 4, 40);
+	PlayerCharacter player(1,"Player", "Hero of the game", 100, itemPouch, 150, true,sword,shield);
 
-	Character npc(4,"NPC", "Hero of the game", 100,itemPouch,150,true);
+	vector<DynamicItem*> items;
+	items.push_back(createConsumable());
+	items.push_back(createWeapon());
 
-	npc.print();
+	vector<InteractableCharacter*> characters;
+	characters.push_back(&player);
+
+
+	Scenary cupboard(1, "cupboard", "A simple cupboard", "It is old and worn.", true);
+
+
+
+	vector<Scenary*> scenary;
+	scenary.push_back(&cupboard);
+
+	vector<ConnectedRoom> connectedRooms;
+
+	Room house(5, "House", "Starting House", items, characters, scenary, connectedRooms);
 
 	system("pause");
 	return 0;
@@ -40,7 +56,7 @@ int main()
 
 Consumable* createConsumable() 
 {
-	return new Consumable(101, "Potion of Healing", "Heals those who are ill", 5, true, 1, healthPotion, 20);
+	return new Consumable(1, "Potion of Healing", "Heals those who are ill", 5, true, 1, healthPotion, 20);
 }
 
 Weapon* createWeapon()

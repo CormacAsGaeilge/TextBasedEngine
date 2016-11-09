@@ -1,8 +1,11 @@
 #include "Room.h"
+#include <iostream>
+#include <string>
+using namespace std;
 
 
-
-Room::Room(unsigned int id, std::string name, std::string description, std::vector<DynamicItem*> items, std::vector<InteractableCharacter*> characters, std::vector<Scenary*> scenary, std::vector<ConnectedRoom> connectedRooms)
+Room::Room(unsigned int id, string name, string description, vector<DynamicItem*> items, vector<InteractableCharacter*> characters, 
+	vector<Scenary*> scenary, vector<ConnectedRoom> connectedRooms)
 	:Object(id,name,description)
 {
 	setItems(items);
@@ -16,26 +19,63 @@ Room::~Room()
 {
 }
 
-void Room::setItems(std::vector<DynamicItem*> items)
+void Room::setItems(vector<DynamicItem*> items)
 {
 	for (DynamicItem* ptr : items)
 		Room::items.push_back(ptr);
 }
 
-void Room::setCharacters(std::vector<InteractableCharacter*> characters)
+void Room::setCharacters(vector<InteractableCharacter*> characters)
 {
 	for (InteractableCharacter* ptr : characters)
 		Room::characters.push_back(ptr);
 }
 
-void Room::setScenary(std::vector<Scenary*> scenary)
+void Room::setScenary(vector<Scenary*> scenary)
 {
 	for (Scenary* ptr : scenary)
 		Room::scenary.push_back(ptr);
 }
 
-void Room::setConnectedRooms(std::vector<ConnectedRoom> connectedRooms)
+void Room::setConnectedRooms(vector<ConnectedRoom> connectedRooms)
 {
 	for (ConnectedRoom room : connectedRooms)
 		Room::connectedRooms.push_back(room);
+}
+
+void Room::print()
+{
+	cout << "***************Start of Room***************\nName:\t" << Room::getName() << "\n\nItems in Room:" << endl; 
+	Room::printItems();
+	cout<< "\n\nScenary in Room:\n";
+	Room::printScenary();
+	cout << "\n\nPrint Characters in Room:" << endl; 
+	Room::printCharacters(); 
+	cout << "\n\nPrint Connecting Rooms" << endl;
+	Room::printConnectedRooms();
+	cout << "\n****************End of Room****************" << endl;
+}
+
+void Room::printItems()
+{
+	for (DynamicItem* ptr : Room::getItems())
+		ptr->print();
+}
+
+void Room::printScenary()
+{
+	for (Scenary* ptr : Room::getScenary())
+		ptr->print();
+}
+
+void Room::printCharacters()
+{
+	for (InteractableCharacter* ptr : Room::getCharacters())
+		ptr->print();
+}
+
+void Room::printConnectedRooms()
+{
+	for (ConnectedRoom room : Room::getConnectedRooms())
+		cout << "Connected Room:\t" << room.getRoomId << endl;
 }

@@ -23,6 +23,12 @@ public:
 	void setCharacters(std::vector<InteractableCharacter*>);
 	void setScenary(std::vector<Scenary*>);
 	void setConnectedRooms(std::vector<ConnectedRoom>);
+	void print();
+	void printItems();
+	void printScenary();
+	void printCharacters();
+	void printConnectedRooms();
+
 private:
 	std::vector<DynamicItem*> items;
 	std::vector<InteractableCharacter*> characters;

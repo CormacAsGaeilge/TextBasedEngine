@@ -14,13 +14,13 @@ Character::Character(unsigned int id, std::string name, std::string description,
 
 Character::Character() : Object()
 {
-
 }
 
 
 Character::~Character()
 {
-
+	for(DynamicItem* ptr : Character::itemPouch)
+		delete ptr;
 }
 
 void Character::setHealth(unsigned int health)

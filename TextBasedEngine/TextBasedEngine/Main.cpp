@@ -37,10 +37,10 @@ PlayerCharacter* createPlayer(unsigned int id, string name, std::string descript
 Scenary* createScenary(unsigned int id, std::string name, std::string description, std::string additionalDialogue, bool state);
 
 DynamicItem* populateItem(string itemAsString, string delimiter);
-vector<DynamicItem*> populateItemVector(vector<DynamicItem*>& dynamicItems, vector<string>items, string delimiter);
-vector<Character*> populateCharacterVector(vector<Character*> characterVector, vector<string> characters, string delimiter);
-vector<Scenary*> populateScenaryVector(vector<Scenary*> scenaryVector, vector<string> scenaryPieces, string delimiter);
-vector<ConnectedRoom> poulateConnectedRoomVector(vector<ConnectedRoom> cRoomVector, vector<string> cRooms, string delimiter);
+void populateItemVector(vector<DynamicItem*>& dynamicItems, vector<string>items, string delimiter);
+void populateCharacterVector(vector<Character*>& characterVector, vector<string> characters, string delimiter);
+void populateScenaryVector(vector<Scenary*>& scenaryVector, vector<string> scenaryPieces, string delimiter);
+void poulateConnectedRoomVector(vector<ConnectedRoom>& cRoomVector, vector<string> cRooms, string delimiter);
 
 DirectionType getDirection(int x);
 vector<Room> loadRoomsFromFile();
@@ -138,7 +138,7 @@ int main()
 */
 }
 
-vector<ConnectedRoom> poulateConnectedRoomVector(vector<ConnectedRoom> cRoomVector, vector<string> cRooms,string delimiter)
+void poulateConnectedRoomVector(vector<ConnectedRoom>& cRoomVector, vector<string> cRooms,string delimiter)
 {
 	stringstream ss;
 	int dir;
@@ -157,7 +157,6 @@ vector<ConnectedRoom> poulateConnectedRoomVector(vector<ConnectedRoom> cRoomVect
 		isLocked = to_bool(connectedRoom[2]);
 		cRoomVector.push_back(ConnectedRoom(roomId, direction, isLocked));
 	}
-	return cRoomVector;
 }
 
 DirectionType getDirection(int x)
@@ -184,7 +183,7 @@ DirectionType getDirection(int x)
 	}
 }
 
-vector<Scenary*> populateScenaryVector(vector<Scenary*> scenaryVector, vector<string> scenaryPieces, string delimiter)
+void populateScenaryVector(vector<Scenary*>& scenaryVector, vector<string> scenaryPieces, string delimiter)
 {
 	stringstream ss;
 	unsigned int sceneId;
@@ -201,10 +200,9 @@ vector<Scenary*> populateScenaryVector(vector<Scenary*> scenaryVector, vector<st
 		state = to_bool(scenaryPiece[4]);
 		scenaryVector.push_back(createScenary(sceneId, name, desc, additionalDialogue, state));
 	}
-	return scenaryVector;
 }
 
-vector<Character*> populateCharacterVector(vector<Character*> characterVector, vector<string> characters, string delimiter)
+void populateCharacterVector(vector<Character*>& characterVector, vector<string> characters, string delimiter)
 {
 	/*
 	***Characters***
@@ -260,15 +258,12 @@ vector<Character*> populateCharacterVector(vector<Character*> characterVector, v
 			characterVector.push_back(createNPC(charId, name, desc, health, dynamicItems, wallet, state, populateItem(leftHand, ","), populateItem(rightHand, ",")));
 		}
 	}
-
-	return characterVector;
 }
 
-vector<DynamicItem*> populateItemVector(vector<DynamicItem*>& dynamicItems, vector<string>items, string delimiter)
+void populateItemVector(vector<DynamicItem*>& dynamicItems, vector<string>items, string delimiter)
 {
 	for (string s : items)
 		dynamicItems.push_back(populateItem(s, delimiter));
-	return dynamicItems;
 }
 
 DynamicItem* populateItem(string itemAsString, string delimiter)
@@ -370,14 +365,13 @@ vector<Room> loadRoomsFromFile()
 
 	vector<Room> allRooms;
 
-	ifstream inFile;
-	inFile.open("c:/temp/gameFile.txt");
+	/******************************Code by Maik Beckmann from http://stackoverflow.com/questions/2912520/read-file-contents-into-a-string-in-c *********************************/
 
-	string gameFile;
-	while (!inFile.eof())
-	{
-		inFile >> gameFile;
-	}
+	ifstream inFile("c:/temp/game.txt");
+	string gameFile((std::istreambuf_iterator<char>(inFile)),
+		(std::istreambuf_iterator<char>()));
+	
+	cout << gameFile;
 
 	
 	vector<string> rooms = split(gameFile, "/");
@@ -413,11 +407,13 @@ vector<Room> loadRoomsFromFile()
 		vector<ConnectedRoom> cRoomVector;
 		vector<string> cRoom = split(cRoomString, "~");
 		poulateConnectedRoomVector(cRoomVector, cRoom, "|");
+
+
 		allRooms.push_back(Room(roomId, name, description,
-			populateItemVector(dynamicItems, items, "|"),
-			populateCharacterVector(characterVector, characters, "|"),
-			populateScenaryVector(scenaryVector, scenary, "|"),
-			poulateConnectedRoomVector(cRoomVector, cRoom, "|")));
+			dynamicItems,
+			characterVector,
+			scenaryVector,
+			cRoomVector));
 	}
 	
 	inFile.close();

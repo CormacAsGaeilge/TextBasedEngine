@@ -43,7 +43,7 @@ vector<Scenary*> populateScenaryVector(vector<Scenary*> scenaryVector, vector<st
 vector<ConnectedRoom> poulateConnectedRoomVector(vector<ConnectedRoom> cRoomVector, vector<string> cRooms, string delimiter);
 
 DirectionType getDirection(int x);
-void loadRoomsFromFile();
+vector<Room> loadRoomsFromFile();
 
 
 /***Referenced Code Start***/
@@ -59,58 +59,12 @@ vector<string> split(string data, string delimiter);
 
 int main()
 {
-	//loadRoomsFromFile();
+	vector<Room> allRooms = loadRoomsFromFile();
+	allRooms[0].print();
 	
-	stringstream ss;
-	vector<string> rooms = split("file", "/");
-	unsigned int roomId = 0;
-	string name;
-	string description;
-	string itemsString;
-	string charString;
-	string sceneString;
-	string cRoomString;
-	vector<Room> allRooms;
-
-	for (string s : rooms)
-	{
-		vector<string> roomVar = split(s, "-");
-		//Break down Room
-		
-		ss >> roomVar[0];
-		ss << roomId;
-		name = roomVar[1];
-		description = roomVar[2];
-		itemsString = roomVar[3];
-		charString = roomVar[4];
-		sceneString = roomVar[5];
-		cRoomString = roomVar[6];
-
-		//Break down items
-		vector<DynamicItem*> dynamicItems;
-		vector<string> items = split(itemsString, "~");
-		populateItemVector(dynamicItems, items, "|");
-		
-		vector<Character*> characterVector;
-		vector<string> characters = split(charString, "~");
-		populateCharacterVector(characterVector, characters, "|");
-
-		vector<Scenary*> scenaryVector;
-		vector<string> scenary = split(sceneString, "~");
-		populateScenaryVector(scenaryVector, scenary, "|");
-
-		vector<ConnectedRoom> cRoomVector;
-		vector<string> cRoom = split(cRoomString, "~");
-		poulateConnectedRoomVector(cRoomVector, cRoom, "|");
-		allRooms.push_back(Room(roomId, name, description,
-			populateItemVector(dynamicItems, items, "|"),
-			populateCharacterVector(characterVector, characters, "|"),
-			populateScenaryVector(scenaryVector, scenary, "|"),
-			poulateConnectedRoomVector(cRoomVector, cRoom, "|")));
-	}
 
 
-	//system("pause");
+	system("pause");
 	return 0;
 	/*
 	***Rooms***
@@ -147,7 +101,7 @@ int main()
 		id,name,desc,val,state,uses,lockId#
 
 	***Scenary***
-	scen~scen~scen~scen
+	scen~scen~scen~scene
 	id|name|desc|additionalDialogue|state~
 
 	***cRooms***
@@ -250,9 +204,6 @@ vector<Scenary*> populateScenaryVector(vector<Scenary*> scenaryVector, vector<st
 	return scenaryVector;
 }
 
-
-
-
 vector<Character*> populateCharacterVector(vector<Character*> characterVector, vector<string> characters, string delimiter)
 {
 	/*
@@ -313,7 +264,6 @@ vector<Character*> populateCharacterVector(vector<Character*> characterVector, v
 	return characterVector;
 }
 
-
 vector<DynamicItem*> populateItemVector(vector<DynamicItem*>& dynamicItems, vector<string>items, string delimiter)
 {
 	for (string s : items)
@@ -372,7 +322,6 @@ DynamicItem* populateItem(string itemAsString, string delimiter)
 	}
 }
 
-
 Consumable* createConsumable(unsigned int id, string name, string desc, int val, bool state, int uses, ConsumableType consType, int effectVal)
 {
 	return new Consumable(id, name, desc, val, state, uses,  consType, effectVal);
@@ -408,38 +357,74 @@ Scenary* createScenary(unsigned int id, std::string name, std::string descriptio
 	return new Scenary(id, name, description, additionalDialogue, state);
 }
 
-void loadRoomsFromFile()
+vector<Room> loadRoomsFromFile()
 {
-	ifstream inFile;
-	inFile.open("c:/temp/banterRoom.txt");
-
-	int id;
+	stringstream ss;
+	unsigned int roomId = 0;
 	string name;
 	string description;
-	std::vector<DynamicItem*> item;
-	std::vector<Character*> Char;
-	std::vector<Scenary*> scene;
-	std::vector<ConnectedRoom> cRoom;
+	string itemsString;
+	string charString;
+	string sceneString;
+	string cRoomString;
 
+	vector<Room> allRooms;
+
+	ifstream inFile;
+	inFile.open("c:/temp/gameFile.txt");
+
+	string gameFile;
 	while (!inFile.eof())
 	{
-		inFile >> id;
-		inFile >> name;
-		inFile >> description;
+		inFile >> gameFile;
 	}
 
-	Room room(id, name, description, item, Char, scene, cRoom);
+	
+	vector<string> rooms = split(gameFile, "/");
+	
 
-	room.print();
+	for (string s : rooms)
+	{
+		vector<string> roomVar = split(s, "-");
+		//Break down Room
 
+		ss >> roomVar[0];
+		ss << roomId;
+		name = roomVar[1];
+		description = roomVar[2];
+		itemsString = roomVar[3];
+		charString = roomVar[4];
+		sceneString = roomVar[5];
+		cRoomString = roomVar[6];
+
+		//Break down items
+		vector<DynamicItem*> dynamicItems;
+		vector<string> items = split(itemsString, "~");
+		populateItemVector(dynamicItems, items, "|");
+
+		vector<Character*> characterVector;
+		vector<string> characters = split(charString, "~");
+		populateCharacterVector(characterVector, characters, "|");
+
+		vector<Scenary*> scenaryVector;
+		vector<string> scenary = split(sceneString, "~");
+		populateScenaryVector(scenaryVector, scenary, "|");
+
+		vector<ConnectedRoom> cRoomVector;
+		vector<string> cRoom = split(cRoomString, "~");
+		poulateConnectedRoomVector(cRoomVector, cRoom, "|");
+		allRooms.push_back(Room(roomId, name, description,
+			populateItemVector(dynamicItems, items, "|"),
+			populateCharacterVector(characterVector, characters, "|"),
+			populateScenaryVector(scenaryVector, scenary, "|"),
+			poulateConnectedRoomVector(cRoomVector, cRoom, "|")));
+	}
+	
 	inFile.close();
+
+	return allRooms;
 }
 
-void createItemVector()
-{
-	vector<DynamicItem*> itemVec;
-
-}
 
 /******************************Code by Georg Fritzsche from http://stackoverflow.com/questions/3613284/c-stdstring-to-boolean *********************************/
 bool to_bool(string str) 

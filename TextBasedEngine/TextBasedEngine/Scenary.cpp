@@ -18,10 +18,16 @@ Scenary::~Scenary()
 
 void Scenary::setAdditionalDialogue(std::string additionalDialogue)
 {
-	Scenary::additionalDialogue = (additionalDialogue.length() > 8) ? additionalDialogue : "default dialogue";
+	Scenary::additionalDialogue = (additionalDialogue.length() > 8) ? additionalDialogue : "default Scenary information";
 }
 
 void Scenary::setState(bool state)
 {
 	Scenary::state = (state != false) ? state : true;
+}
+
+void Scenary::print()
+{
+	Object::print();
+
 }

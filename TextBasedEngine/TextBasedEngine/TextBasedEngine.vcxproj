@@ -116,7 +116,6 @@
     <ClCompile Include="ConsumableType.h" />
     <ClCompile Include="DynamicItem.cpp" />
     <ClCompile Include="EnemyCharacter.cpp" />
-    <ClCompile Include="InteractableCharacter.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Key.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -133,7 +132,6 @@
     <ClInclude Include="DirectionType.h" />
     <ClInclude Include="DynamicItem.h" />
     <ClInclude Include="EnemyCharacter.h" />
-    <ClInclude Include="InteractableCharacter.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="Object.h" />

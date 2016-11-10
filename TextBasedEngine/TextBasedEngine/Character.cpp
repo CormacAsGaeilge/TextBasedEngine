@@ -3,7 +3,7 @@
 #include <memory>
 #include <string>
 
-Character::Character(unsigned int id, std::string name, std::string description, unsigned int health, std::vector<DynamicItem*> itemPouch, unsigned int wallet, bool state)
+Character::Character(unsigned int id, std::string name, std::string description, unsigned int health, std::vector<DynamicItem*> itemPouch, unsigned int wallet, bool state, DynamicItem equippedLeft, DynamicItem equippedRight)
 	: Object(id, name, description)
 {
 	setHealth(health);
@@ -19,8 +19,9 @@ Character::Character() : Object()
 
 Character::~Character()
 {
-	for(DynamicItem* ptr : Character::itemPouch)
+	for (DynamicItem* ptr : Character::itemPouch)
 		delete ptr;
+	itemPouch.clear();
 }
 
 void Character::setHealth(unsigned int health)
@@ -65,4 +66,9 @@ void Character::printItemPouch()
 		std::cout << "Empty Pouch" << std::endl;
 	}
 	std::cout << "********************" << std::endl;
+	std::cout << "\nLeft Hand\t";
+	Character::getLeftEquip().print();
+	std::cout << "\nRight Hand\t";
+	Character::getRightEquip().print();
+	std::cout << std::endl;
 }

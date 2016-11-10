@@ -4,7 +4,7 @@
 using namespace std;
 
 
-Room::Room(unsigned int id, string name, string description, vector<DynamicItem*> items, vector<InteractableCharacter*> characters, 
+Room::Room(unsigned int id, string name, string description, vector<DynamicItem*> items, vector<Character*> characters,
 	vector<Scenary*> scenary, vector<ConnectedRoom> connectedRooms)
 	:Object(id,name,description)
 {
@@ -25,9 +25,9 @@ void Room::setItems(vector<DynamicItem*> items)
 		Room::items.push_back(ptr);
 }
 
-void Room::setCharacters(vector<InteractableCharacter*> characters)
+void Room::setCharacters(vector<Character*> characters)
 {
-	for (InteractableCharacter* ptr : characters)
+	for (Character* ptr : characters)
 		Room::characters.push_back(ptr);
 }
 
@@ -74,7 +74,7 @@ void Room::printScenary()
 
 void Room::printCharacters()
 {
-	for (InteractableCharacter* ptr : Room::getCharacters())
+	for (Character* ptr : Room::getCharacters())
 		ptr->print();
 }
 

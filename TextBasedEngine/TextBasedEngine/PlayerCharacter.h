@@ -1,13 +1,13 @@
 #pragma once
-#include "InteractableCharacter.h"
+#include "Character.h"
 class PlayerCharacter :
-	public InteractableCharacter
+	public Character
 {
 public:
 	PlayerCharacter(unsigned int id, std::string name, std::string description, unsigned int health, std::vector<DynamicItem*> itemPouch, unsigned int wallet, bool state, DynamicItem equippedLeft, DynamicItem equippedRight);
-	~PlayerCharacter();
+	virtual ~PlayerCharacter();
 
-	void print();
+	void print() override;
 private:
 
 };

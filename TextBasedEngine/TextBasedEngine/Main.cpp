@@ -25,8 +25,8 @@
 
 using namespace std;
 
-Weapon* createWeapon();
-Consumable* createConsumable();
+Weapon* createWeapon(unsigned int id, string name, string desc, int val, bool state, int uses, int atk, int def);
+Consumable* createConsumable(unsigned int id, string name, string desc, int val, bool state, int uses, ConsumableType consType, int effectVal);
 void loadRoomsFromFile();
 std::vector<std::string> split(std::string data, std::string delimiter);
 int main()
@@ -48,17 +48,30 @@ int main()
 	//writing a split method to parse a string using a delimiter
 
 
+	//convert string to int
+	stringstream ss;
 	vector<string> Rooms = split("file", "/");
+	unsigned int roomId;
+	string name;
+	string description;
+	string itemsString;
+	string charString;
+	string sceneString;
+	string cRoomString;
+
 	for (string s : Rooms)
 	{
+		vector<string> roomVar = split(s, "-");
 		//Break down Room
-		unsigned int id = 0;
-		string name;
-		string description;
-		string itemsString;
-		string CharString;
-		string sceneString;
-		string cRoomString;
+		
+		ss >> roomVar[0];
+		ss << roomId;
+		name = roomVar[1];
+		description = roomVar[2];
+		itemsString = roomVar[3];
+		charString = roomVar[4];
+		sceneString = roomVar[5];
+		cRoomString = roomVar[6];
 
 		//Break down items
 		vector<DynamicItem*> dynamicItems;
@@ -67,7 +80,7 @@ int main()
 		vector<string> items = split(itemsString, "~");
 
 		int val, atk, def, effectVal, uses;
-		unsigned int id, lockId;
+		unsigned int itemId, lockId;
 		string name, desc;
 		bool state;
 		ConsumableType consType;
@@ -82,11 +95,10 @@ int main()
 			}
 			else if (item.size == 7)
 			{
-				//convert string to int
-				stringstream ss;
+				
 				//create Key
 				ss << item[0];
-				ss >> id;
+				ss >> itemId;
 				name = item[1];
 				desc = item[2];
 				ss << item[3];
@@ -95,8 +107,7 @@ int main()
 				ss << item[5];
 				ss >> uses;
 				lockId = to_bool(item[6]);
-				createKey(id, name, desc, val, state, uses, lockId);
-				dynamicItems.push_back(createKey(id, name, desc, val, state, uses, lockId));
+				dynamicItems.push_back(createKey(itemId, name, desc, val, state, uses, lockId));
 			}
 			/*else if (second last item in vector is = number)
 			{

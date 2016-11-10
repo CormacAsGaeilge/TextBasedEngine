@@ -36,7 +36,7 @@ void PlayerCharacter::interaction(std::string action, DynamicItem item)
 
 void PlayerCharacter::pickUp(DynamicItem item)
 {
-	std::cout << "You picked up the " << item.getName << std::endl;
+	std::cout << "You picked up the " << item.getName() << std::endl;
 }
 
 void PlayerCharacter::search()
@@ -46,7 +46,7 @@ void PlayerCharacter::search()
 
 void PlayerCharacter::use(DynamicItem item)
 {
-	std::cout << "You used the " << item.getName << std::endl;
+	std::cout << "You used the " << item.getName() << std::endl;
 }
 
 void PlayerCharacter::interact(DynamicItem item)

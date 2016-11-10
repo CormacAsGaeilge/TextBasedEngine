@@ -25,6 +25,7 @@
 
 using namespace std;
 
+int main();
 Weapon* createWeapon(unsigned int id, string name, string desc, int val, bool state, int uses, int atk, int def, int spd);
 Consumable* createConsumable(unsigned int id, string name, string desc, int val, bool state, int uses, ConsumableType consType, int effectVal);
 Key* createKey(unsigned int id, string name, string desc, int val, bool state, int uses, unsigned int lockId);
@@ -37,20 +38,19 @@ Scenary* createScenary(unsigned int id, std::string name, std::string descriptio
 
 DynamicItem* populateItem(string itemAsString, string delimiter);
 vector<DynamicItem*> populateItemVector(vector<DynamicItem*>& dynamicItems, vector<string>items, string delimiter);
-int main();
 vector<Character*> populateCharacterVector(vector<Character*> characterVector, vector<string> characters, string delimiter);
 vector<Scenary*> populateScenaryVector(vector<Scenary*> scenaryVector, vector<string> scenaryPieces, string delimiter);
+vector<ConnectedRoom> poulateConnectedRoomVector(vector<ConnectedRoom> cRoomVector, vector<string> cRooms, string delimiter);
 
 DirectionType getDirection(int x);
 void loadRoomsFromFile();
 
 
+/***Referenced Code Start***/
+bool to_bool(string str);
+vector<string> split(string data, string delimiter);
 
-
-
-std::vector<std::string> split(std::string data, std::string delimiter);
-
-
+/***Referenced Code End***/
 
 
 
@@ -63,7 +63,7 @@ int main()
 	
 	stringstream ss;
 	vector<string> rooms = split("file", "/");
-	unsigned int roomId;
+	unsigned int roomId = 0;
 	string name;
 	string description;
 	string itemsString;
@@ -267,7 +267,7 @@ vector<Character*> populateCharacterVector(vector<Character*> characterVector, v
 
 
 	stringstream ss;
-	int health, wallet, def, spd, effectVal, uses;
+	int health, wallet;
 	unsigned int charId;
 	string type, name, desc, leftHand, rightHand;
 	bool state, onlyOne = true;
@@ -342,14 +342,14 @@ DynamicItem* populateItem(string itemAsString, string delimiter)
 	ss << item[5];
 	ss >> uses;
 
-	if (item.size == 7)
+	if (item.size() == 7)
 	{
 
 		//create Key
 		lockId = to_bool(item[6]);
 		return createKey(itemId, name, desc, val, state, uses, lockId);
 	}
-	else if (item.size == 8)
+	else if (item.size() == 8)
 	{
 		//create Consumable
 		/*ss << item[6];
@@ -371,26 +371,6 @@ DynamicItem* populateItem(string itemAsString, string delimiter)
 		return createWeapon(itemId, name, desc, val, state, uses, atk, def, spd);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-bool to_bool(string str) {
-	transform(str.begin(), str.end(), str.begin(), ::tolower);
-	istringstream is(str);
-	bool b;
-	is >> std::boolalpha >> b;
-	return b;
-}
-
 
 
 Consumable* createConsumable(unsigned int id, string name, string desc, int val, bool state, int uses, ConsumableType consType, int effectVal)
@@ -461,13 +441,24 @@ void createItemVector()
 
 }
 
-std::vector<std::string> split(std::string data, std::string delimiter)
+/******************************Code by Georg Fritzsche from http://stackoverflow.com/questions/3613284/c-stdstring-to-boolean *********************************/
+bool to_bool(string str) 
 {
-	std::vector<std::string> outVector;
-	std::string strElement;
-	std::size_t oldPos = -1;
-	std::size_t pos = data.find(delimiter, oldPos + 1);
-	while (pos != std::string::npos)
+	transform(str.begin(), str.end(), str.begin(), ::tolower);
+	istringstream is(str);
+	bool b;
+	is >> std::boolalpha >> b;
+	return b;
+}
+
+/******************************Code by Niall McGuinness from moodle*********************************/
+vector<string> split(string data, string delimiter)
+{
+	vector<string> outVector;
+	string strElement;
+	size_t oldPos = -1;
+	size_t pos = data.find(delimiter, oldPos + 1);
+	while (pos != string::npos)
 	{
 		strElement = data.substr(oldPos + 1, pos - oldPos - 1);
 		outVector.push_back(strElement);

@@ -1,2 +1,7 @@
 #pragma once
-enum ConsumableType {healthPotion, healthPoison};
+
+enum ConsumableType 
+{
+	healthPotion = 0, 
+	healthPoison = 1
+};

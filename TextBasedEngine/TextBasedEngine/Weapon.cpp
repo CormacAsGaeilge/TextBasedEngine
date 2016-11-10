@@ -1,7 +1,7 @@
 #include "Weapon.h"
 #include <iostream>
 #include <string>
-Weapon::Weapon(unsigned int id, std::string name, std::string description, unsigned int value, bool state, unsigned int uses, unsigned int attack, unsigned int defense)
+Weapon::Weapon(unsigned int id, std::string name, std::string description, unsigned int value, bool state, unsigned int uses, unsigned int attack, unsigned int defense, unsigned int speed)
 	: DynamicItem(id,name,description,value,state,uses)
 {
 	setAttack(attack);
@@ -27,6 +27,12 @@ void Weapon::setDefense(unsigned int defense)
 {
 	Weapon::defense = (defense > 0) ? defense : 10;
 }
+
+void Weapon::setSpeed(unsigned int speed)
+{
+	Weapon::speed = (speed > 0) ? speed : 5;
+}
+
 void Weapon::print()
 {
 	DynamicItem::print();

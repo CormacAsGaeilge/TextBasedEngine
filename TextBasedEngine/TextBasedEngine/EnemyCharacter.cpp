@@ -1,8 +1,8 @@
 #include "EnemyCharacter.h"
 
 EnemyCharacter::EnemyCharacter(unsigned int id, std::string name, std::string description, unsigned int health,
-	std::vector<DynamicItem*> itemPouch, unsigned int wallet, bool state, DynamicItem equippedLeft,
-	DynamicItem equippedRight, std::string additionalDialogue)
+	std::vector<DynamicItem*> itemPouch, unsigned int wallet, bool state, DynamicItem* equippedLeft,
+	DynamicItem* equippedRight, std::string additionalDialogue)
 	: Character(id, name, description, health, itemPouch, wallet, state,equippedLeft,equippedRight)
 {
 	setAdditionalDialogue(additionalDialogue);

@@ -65,7 +65,6 @@ void Room::printItems()
 		ptr->print();
 }
 
-
 void Room::printScenary()
 {
 	for (Scenary* ptr : Room::getScenary())

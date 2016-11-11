@@ -1,8 +1,3 @@
-﻿  Character.cpp
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  PlayerCharacter.cpp
-  EnemyCharacter.cpp
-  ConnectedRoom.cpp
-  TextBasedEngine.vcxproj -> C:\Users\WonkierHickory\Source\Repos\TextBasedEngine\TextBasedEngine\Debug\TextBasedEngine.exe
-  TextBasedEngine.vcxproj -> C:\Users\WonkierHickory\Source\Repos\TextBasedEngine\TextBasedEngine\Debug\TextBasedEngine.pdb (Partial PDB)
+﻿  Main.cpp
+  TextBasedEngine.vcxproj -> I:\Projects\TextBasedEngine\TextBasedEngine\Debug\TextBasedEngine.exe
+  TextBasedEngine.vcxproj -> I:\Projects\TextBasedEngine\TextBasedEngine\Debug\TextBasedEngine.pdb (Partial PDB)

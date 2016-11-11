@@ -10,7 +10,7 @@ public:
 	unsigned int getValue() const { return value; }
 
 	void setValue(unsigned int value);
-	void print();
+	virtual void print();
 private:
 	unsigned int value;
 };

@@ -47,13 +47,20 @@ void populateCharacterVector(vector<Character*>& characterVector, vector<string>
 void populateScenaryVector(vector<Scenary*>& scenaryVector, vector<string> scenaryPieces, string delimiter);
 void poulateConnectedRoomVector(vector<ConnectedRoom>& cRoomVector, vector<string> cRooms, string delimiter);
 
-DirectionType getDirection(int x);
-vector<Room> loadRoomsFromFile();
+bool checkIfRoom(vector<Room> allRooms, string noun);
+bool checkIfScenary(Room& currentRoom, string noun);
+bool checkIfItem(Room& currentRoom, string noun);
+bool checkIfCharacter(Room& currentRoom, string noun);
 
+DirectionType getDirection(int x);
+DirectionType getDirection(string s);
+
+vector<Room> loadRoomsFromFile();
+string toLowerCase(string s);
 
 size_t getRoomIdWithPlayer(vector<Room>& allRooms);
 Character* getPlayer(Room& currentRoom);
-
+void changeRoom(vector<Room>& allRooms, unsigned int currentRoomId, unsigned int destinationRoomId, DirectionType direction);
 
 /***Referenced Code Start***/
 bool to_bool(string str);
@@ -70,6 +77,83 @@ int main()
 	Room *currentRoom = &allRooms[getRoomIdWithPlayer(allRooms)];
 	currentRoom->print();
 
+	string verb, noun;
+	cout << "Enter your command: ";
+	cin >> verb, noun;
+
+	verb = toLowerCase(verb);
+	noun = toLowerCase(noun);
+	if (verb == "go")
+	{
+		if (checkIfRoom(allRooms, noun))
+		{
+			
+			DirectionType dir = getDirection(noun);
+
+			//check if more than one room in direction
+			unsigned int numOfRooms = 0, destinationId;
+			vector<ConnectedRoom*> connectedRoomIds;
+			for (ConnectedRoom cR : currentRoom->getConnectedRooms())
+			{
+				if (cR.getDirection() == dir)
+				{
+					numOfRooms++;
+					connectedRoomIds.push_back(&cR);
+				}
+			}
+			if (numOfRooms == 0)
+				cout << "No rooms in that direction" << endl;
+			else if (numOfRooms == 1)
+			{
+				for(ConnectedRoom cR : currentRoom->getConnectedRooms())
+				{
+					if (cR.getDirection() == dir)
+						changeRoom(allRooms, currentRoom->getId(), cR.getRoomId(), dir);
+				}	
+			}
+			else
+			{
+				cout << "multiple rooms in this direction" << endl;
+				size_t vecSize = connectedRoomIds.size();
+				unsigned int i = 0, selectedRoomNumber;
+				for (Room r : allRooms)
+				{
+					if (r.getId() == connectedRoomIds[i]->getRoomId())
+					{
+						cout << "[" << i << "] - " << r.getName() << endl;
+						i++;
+					}
+				}
+				cout << "enter number of room:";
+				cin >> selectedRoomNumber;
+				destinationId = connectedRoomIds[selectedRoomNumber]->getRoomId();
+				changeRoom(allRooms, currentRoom->getId(), destinationId, dir);
+			}
+		}
+		else
+			cout << "verb go can only be used with direction" << endl;
+		
+	}
+	else if (verb == "pickup")
+	{
+
+	}
+	else if (verb == "lookat")
+	{
+
+	}
+	else if (verb == "use")
+	{
+
+	}
+	else if (verb == "view")
+	{
+
+	}
+	else
+	{
+
+	}
 
 
 	system("pause");
@@ -146,6 +230,36 @@ int main()
 */
 }
 
+bool checkIfItem(Room& currentRoom, string noun)
+{
+	return true;
+}
+
+bool checkIfCharacter(Room& currentRoom, string noun)
+{
+	return true;
+}
+
+bool checkIfScenary(Room& currentRoom, string noun)
+{
+	return true;
+}
+
+bool checkIfRoom(vector<Room> allRooms, string noun)
+{
+	string nameLowerCase;
+	for (Room r : allRooms)
+	{
+		nameLowerCase = toLowerCase(r.getName());
+		if (nameLowerCase == noun)
+			return true;
+	}
+	return false;
+}
+
+
+
+
 size_t getRoomIdWithPlayer(vector<Room>& allRooms)
 {
 	size_t size = allRooms.size();
@@ -182,6 +296,8 @@ void changeRoom(vector<Room>& allRooms, unsigned int currentRoomId, unsigned int
 				Character* player = getPlayer(allRooms[currentRoomId]);
 				allRooms[destinationRoomId].addCharacter(player);
 				allRooms[currentRoomId].removeCharacter(player->getId());
+				cout << player->getName() << " left " << allRooms[currentRoomId].getName()
+					<< " and went to " << allRooms[destinationRoomId].getName() << endl;
 			}
 			else
 			{
@@ -190,15 +306,6 @@ void changeRoom(vector<Room>& allRooms, unsigned int currentRoomId, unsigned int
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
 
 void poulateConnectedRoomVector(vector<ConnectedRoom>& cRoomVector, vector<string> cRooms,string delimiter)
 {
@@ -247,6 +354,37 @@ DirectionType getDirection(int x)
 	}
 }
 
+DirectionType getDirection(string s)
+{
+	s = toLowerCase(s);
+	
+	if (s == "north")
+		return North;
+	else if (s == "northeast")
+		return NorthEast;
+	else if (s == "east")
+		return East;
+	else if (s == "southeast")
+		return SouthEast;
+	else if (s == "south")
+		return South;
+	else if (s == "southwest")
+		return SouthWest;
+	else if (s == "west")
+		return West;
+	else if (s == "northwest")
+		return NorthWest;
+	else
+		return North;
+}
+
+string toLowerCase(string s)
+{
+	unsigned int length = s.length();
+	for (unsigned int i = 0; i<length; i++)
+		s[i]=tolower(s[i]);
+	return s;
+}
 void populateScenaryVector(vector<Scenary*>& scenaryVector, vector<string> scenaryPieces, string delimiter)
 {
 	/*
@@ -456,11 +594,7 @@ vector<Room> loadRoomsFromFile()
 	string gameFile((std::istreambuf_iterator<char>(inFile)),
 		(std::istreambuf_iterator<char>()));
 	
-	cout << gameFile;
-
-	
 	vector<string> rooms = split(gameFile, "/");
-	
 
 	for (string s : rooms)
 	{

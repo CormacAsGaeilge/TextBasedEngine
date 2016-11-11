@@ -9,7 +9,7 @@ public:
 
 	unsigned int getLockId() const { return lockId; }
 	void setLockId(unsigned int lockId);
-
+	void print() override;
 private:
 	unsigned int lockId;
 };

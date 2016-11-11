@@ -12,7 +12,7 @@ public:
 
 	void setState(bool state);
 	void setUses(unsigned int uses);
-	virtual void print();
+	virtual void print() override;
 private:
 	bool state;
 	unsigned int uses;

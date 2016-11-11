@@ -70,17 +70,16 @@ vector<string> split(string data, string delimiter);
 
 #pragma endregion
 
-int main()
-{
-	vector<Room> allRooms = loadRoomsFromFile();
-	//allRooms[0].print();
-	Room *currentRoom = &allRooms[getRoomIdWithPlayer(allRooms)];
-	currentRoom->print();
+#pragma region Example of text file format
 
+/*
+***Rooms***
+room/room/room/room
 	string verb, noun;
 	cout << "Enter your command: ";
 	cin >> verb, noun;
 
+1-name-description-items-Char-Scen-cRooms/2-name-description-items-Char-Scen-cRooms/
 	verb = toLowerCase(verb);
 	noun = toLowerCase(noun);
 	if (verb == "go")
@@ -90,6 +89,15 @@ int main()
 			
 			DirectionType dir = getDirection(noun);
 
+***Items***
+item~item~item~item
+id|name|desc|val|state|uses~
+or
+id|name|desc|val|state|uses|consType|effectVal~
+or
+id|name|desc|val|state|uses|atk|def~
+or
+id|name|desc|val|state|uses|lockId~
 			//check if more than one room in direction
 			unsigned int numOfRooms = 0, destinationId;
 			vector<ConnectedRoom*> connectedRoomIds;
@@ -162,72 +170,83 @@ int main()
 	***Rooms***
 	room/room/room/room
 
-	1-name-description-items-Char-Scen-cRooms/2-name-description-items-Char-Scen-cRooms/
+***Characters***
+char~char~char~char
+plr|id|name|des|health|items|wallet|state|leftHand|rightHand~
+or
+enemy|id|name|des|health|items|wallet|state|leftHand|rightHand~
+or
+npc|id|name|des|health|items|wallet|state|leftHand|rightHand~
 
-	***Items***
-	item~item~item~item
-	id|name|desc|val|state|uses~
-	or
-	id|name|desc|val|state|uses|consType|effectVal~
-	or
-	id|name|desc|val|state|uses|atk|def~
-	or
-	id|name|desc|val|state|uses|lockId~
+***Character items***
+item#item#item#item
+id,name,desc,val,state,uses#
+or
+id,name,desc,val,state,uses,consType,effectVal#
+or
+id,name,desc,val,state,uses,atk,def#
+or
+id,name,desc,val,state,uses,lockId#
 
-	***Characters***
-	char~char~char~char
-	plr|id|name|des|health|items|wallet|state|leftHand|rightHand~
-	or
-	enemy|id|name|des|health|items|wallet|state|leftHand|rightHand~
-	or
-	npc|id|name|des|health|items|wallet|state|leftHand|rightHand~
-	
-		***Character items***
-		item#item#item#item
-		id,name,desc,val,state,uses#
-		or
-		id,name,desc,val,state,uses,consType,effectVal#
-		or
-		id,name,desc,val,state,uses,atk,def#
-		or
-		id,name,desc,val,state,uses,lockId#
+***Scenary***
+scen~scen~scen~scene
+id|name|desc|additionalDialogue|state~
 
-	***Scenary***
-	scen~scen~scen~scene
-	id|name|desc|additionalDialogue|state~
-
-	***cRooms***
-	roomId|direction|isLocked~
-	*/
-	/*vector<DynamicItem*> itemPouch;
-	Weapon sword(1, "sword", "a basic sword", 15, true, 50, 35, 4);
-	Weapon shield(1, "shield", "a basic shield", 15, true, 50, 4, 40);
-	itemPouch.push_back(createConsumable());
-	itemPouch.push_back(createWeapon());
-
-	PlayerCharacter player(1,"Player", "Hero of the game", 100, itemPouch, 150, true,sword,shield);
-
-
-	player.print();*/
-	/*vector<DynamicItem*> items;
-	items.push_back(createConsumable());
-	items.push_back(createWeapon());
-
-	vector<InteractableCharacter*> characters;
-	characters.push_back(&player);
-
-
-	Scenary cupboard(1, "cupboard", "A simple cupboard", "It is old and worn.", true);
-
-
-
-	vector<Scenary*> scenary;
-	scenary.push_back(&cupboard);
-
-	vector<ConnectedRoom> connectedRooms;
-
-	Room house(5, "House", "Starting House", items, characters, scenary, connectedRooms);
+***cRooms***
+roomId|direction|isLocked~
 */
+/*vector<DynamicItem*> itemPouch;
+Weapon sword(1, "sword", "a basic sword", 15, true, 50, 35, 4);
+Weapon shield(1, "shield", "a basic shield", 15, true, 50, 4, 40);
+itemPouch.push_back(createConsumable());
+itemPouch.push_back(createWeapon());
+
+PlayerCharacter player(1,"Player", "Hero of the game", 100, itemPouch, 150, true,sword,shield);
+
+
+player.print();*/
+/*vector<DynamicItem*> items;
+items.push_back(createConsumable());
+items.push_back(createWeapon());
+
+vector<InteractableCharacter*> characters;
+characters.push_back(&player);
+
+
+Scenary cupboard(1, "cupboard", "A simple cupboard", "It is old and worn.", true);
+
+
+
+vector<Scenary*> scenary;
+scenary.push_back(&cupboard);
+
+vector<ConnectedRoom> connectedRooms;
+
+Room house(5, "House", "Starting House", items, characters, scenary, connectedRooms);
+*/
+
+#pragma endregion
+
+int main()
+{
+	#pragma region test
+
+	vector<Room> allRooms = loadGameFromFile();
+	//allRooms[0].print();
+	Room *currentRoom = &allRooms[getRoomIdWithPlayer(allRooms)];
+	//currentRoom->print();
+
+	#pragma endregion
+
+	#pragma region Story
+
+	cout << "Now you begin your story." << endl;
+	allRooms[0].print();
+
+	#pragma endregion		
+	
+	system("pause");
+	return 0;
 }
 
 bool checkIfItem(Room& currentRoom, string noun)
@@ -263,7 +282,7 @@ bool checkIfRoom(vector<Room> allRooms, string noun)
 size_t getRoomIdWithPlayer(vector<Room>& allRooms)
 {
 	size_t size = allRooms.size();
-	for (size_t i=0; i<size; i++)
+	for (size_t i = 0; i<size; i++)
 	{
 		Character* c;
 		c = getPlayer(allRooms[i]);
@@ -540,17 +559,21 @@ DynamicItem* populateItem(string itemAsString, string delimiter)
 	}
 }
 
+#pragma endregion
+
+#pragma region Create Classes
+
 Consumable* createConsumable(unsigned int id, string name, string desc, int val, bool state, int uses, ConsumableType consType, int effectVal)
 {
-	return new Consumable(id, name, desc, val, state, uses,  consType, effectVal);
+	return new Consumable(id, name, desc, val, state, uses, consType, effectVal);
 }
 
 Weapon* createWeapon(unsigned int id, string name, string desc, int val, bool state, int uses, int atk, int def, int spd)
 {
-	return new Weapon(id, name, desc, val, state, uses, atk, def,spd);
+	return new Weapon(id, name, desc, val, state, uses, atk, def, spd);
 }
 
-Key* createKey(unsigned int id, string name, string desc, int val, bool state, int uses, unsigned int lockId )
+Key* createKey(unsigned int id, string name, string desc, int val, bool state, int uses, unsigned int lockId)
 {
 	return new Key(id, name, desc, val, state, uses, lockId);
 }
@@ -567,7 +590,7 @@ EnemyCharacter* createEnemy(unsigned int id, string name, std::string descriptio
 
 PlayerCharacter* createPlayer(unsigned int id, string name, std::string description, unsigned int health, vector<DynamicItem*> itemPouch, unsigned int wallet, bool state, DynamicItem* equippedLeft, DynamicItem* equippedRight)
 {
-	return new PlayerCharacter(id,name,description,health,itemPouch,wallet,state,equippedLeft,equippedRight);
+	return new PlayerCharacter(id, name, description, health, itemPouch, wallet, state, equippedLeft, equippedRight);
 }
 
 Scenary* createScenary(unsigned int id, std::string name, std::string description, std::string additionalDialogue, bool state)
@@ -575,7 +598,11 @@ Scenary* createScenary(unsigned int id, std::string name, std::string descriptio
 	return new Scenary(id, name, description, additionalDialogue, state);
 }
 
-vector<Room> loadRoomsFromFile()
+#pragma endregion
+
+#pragma region loadGame
+
+vector<Room> loadGameFromFile()
 {
 	stringstream ss;
 	unsigned int roomId = 0;
@@ -595,6 +622,7 @@ vector<Room> loadRoomsFromFile()
 		(std::istreambuf_iterator<char>()));
 	
 	vector<string> rooms = split(gameFile, "/");
+
 
 	for (string s : rooms)
 	{
@@ -622,8 +650,6 @@ vector<Room> loadRoomsFromFile()
 
 		vector<Scenary*> scenaryVector;
 		vector<string> scenary = split(sceneString, "~");
-		for (string s : scenary)
-			cout << s << endl;
 		populateScenaryVector(scenaryVector, scenary, "|");
 
 		vector<ConnectedRoom> cRoomVector;
@@ -637,15 +663,18 @@ vector<Room> loadRoomsFromFile()
 			scenaryVector,
 			cRoomVector));
 	}
-	
+
 	inFile.close();
 
 	return allRooms;
 }
 
+#pragma endregion
+
+#pragma region Sourced Code
 
 /******************************Code by Georg Fritzsche from http://stackoverflow.com/questions/3613284/c-stdstring-to-boolean *********************************/
-bool to_bool(string str) 
+bool to_bool(string str)
 {
 	transform(str.begin(), str.end(), str.begin(), ::tolower);
 	istringstream is(str);
@@ -671,3 +700,11 @@ vector<string> split(string data, string delimiter)
 	}
 	return outVector;
 }
+
+#pragma endregion
+
+
+
+
+
+

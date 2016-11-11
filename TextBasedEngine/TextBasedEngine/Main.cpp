@@ -68,36 +68,38 @@ vector<string> split(string data, string delimiter);
 
 /***Referenced Code End***/
 
-#pragma endregion
 
-#pragma region Example of text file format
 
-/*
-***Rooms***
-room/room/room/room
+int main()
+{
+	vector<Room> allRooms = loadGameFromFile();
+	//allRooms[0].print();
+	Room *currentRoom = &allRooms[getRoomIdWithPlayer(allRooms)];
+	//currentRoom->print();
+
+	#pragma endregion
+
+	#pragma region Story
+
+	cout << "Now you begin your story." << endl;
+	allRooms[0].print();
+
+	#pragma endregion		
+	
 	string verb, noun;
 	cout << "Enter your command: ";
 	cin >> verb, noun;
 
-1-name-description-items-Char-Scen-cRooms/2-name-description-items-Char-Scen-cRooms/
+
 	verb = toLowerCase(verb);
 	noun = toLowerCase(noun);
 	if (verb == "go")
 	{
 		if (checkIfRoom(allRooms, noun))
 		{
-			
+
 			DirectionType dir = getDirection(noun);
 
-***Items***
-item~item~item~item
-id|name|desc|val|state|uses~
-or
-id|name|desc|val|state|uses|consType|effectVal~
-or
-id|name|desc|val|state|uses|atk|def~
-or
-id|name|desc|val|state|uses|lockId~
 			//check if more than one room in direction
 			unsigned int numOfRooms = 0, destinationId;
 			vector<ConnectedRoom*> connectedRoomIds;
@@ -113,11 +115,11 @@ id|name|desc|val|state|uses|lockId~
 				cout << "No rooms in that direction" << endl;
 			else if (numOfRooms == 1)
 			{
-				for(ConnectedRoom cR : currentRoom->getConnectedRooms())
+				for (ConnectedRoom cR : currentRoom->getConnectedRooms())
 				{
 					if (cR.getDirection() == dir)
 						changeRoom(allRooms, currentRoom->getId(), cR.getRoomId(), dir);
-				}	
+				}
 			}
 			else
 			{
@@ -140,7 +142,7 @@ id|name|desc|val|state|uses|lockId~
 		}
 		else
 			cout << "verb go can only be used with direction" << endl;
-		
+
 	}
 	else if (verb == "pickup")
 	{
@@ -162,89 +164,6 @@ id|name|desc|val|state|uses|lockId~
 	{
 
 	}
-
-
-	system("pause");
-	return 0;
-	/*
-	***Rooms***
-	room/room/room/room
-
-***Characters***
-char~char~char~char
-plr|id|name|des|health|items|wallet|state|leftHand|rightHand~
-or
-enemy|id|name|des|health|items|wallet|state|leftHand|rightHand~
-or
-npc|id|name|des|health|items|wallet|state|leftHand|rightHand~
-
-***Character items***
-item#item#item#item
-id,name,desc,val,state,uses#
-or
-id,name,desc,val,state,uses,consType,effectVal#
-or
-id,name,desc,val,state,uses,atk,def#
-or
-id,name,desc,val,state,uses,lockId#
-
-***Scenary***
-scen~scen~scen~scene
-id|name|desc|additionalDialogue|state~
-
-***cRooms***
-roomId|direction|isLocked~
-*/
-/*vector<DynamicItem*> itemPouch;
-Weapon sword(1, "sword", "a basic sword", 15, true, 50, 35, 4);
-Weapon shield(1, "shield", "a basic shield", 15, true, 50, 4, 40);
-itemPouch.push_back(createConsumable());
-itemPouch.push_back(createWeapon());
-
-PlayerCharacter player(1,"Player", "Hero of the game", 100, itemPouch, 150, true,sword,shield);
-
-
-player.print();*/
-/*vector<DynamicItem*> items;
-items.push_back(createConsumable());
-items.push_back(createWeapon());
-
-vector<InteractableCharacter*> characters;
-characters.push_back(&player);
-
-
-Scenary cupboard(1, "cupboard", "A simple cupboard", "It is old and worn.", true);
-
-
-
-vector<Scenary*> scenary;
-scenary.push_back(&cupboard);
-
-vector<ConnectedRoom> connectedRooms;
-
-Room house(5, "House", "Starting House", items, characters, scenary, connectedRooms);
-*/
-
-#pragma endregion
-
-int main()
-{
-	#pragma region test
-
-	vector<Room> allRooms = loadGameFromFile();
-	//allRooms[0].print();
-	Room *currentRoom = &allRooms[getRoomIdWithPlayer(allRooms)];
-	//currentRoom->print();
-
-	#pragma endregion
-
-	#pragma region Story
-
-	cout << "Now you begin your story." << endl;
-	allRooms[0].print();
-
-	#pragma endregion		
-	
 	system("pause");
 	return 0;
 }

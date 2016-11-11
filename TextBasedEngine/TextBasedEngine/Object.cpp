@@ -31,7 +31,7 @@ void Object::setName(std::string name)
 
 void Object::setDescription(std::string description)
 {
-	Object::description = (description.length() < 8) ? description : "default description";
+	Object::description = (description.length() > 8) ? description : "default description";
 }
 
 void Object::print() 

@@ -1,3 +1,5 @@
+#pragma region Includes
+
 #include <iostream>
 #include <memory>
 #include <vector>
@@ -23,9 +25,12 @@
 #include "Scenary.h"
 #include "Room.h"
 
+#pragma endregion
+
+#pragma region Initialisation of Methods
+
 using namespace std;
 
-int main();
 Weapon* createWeapon(unsigned int id, string name, string desc, int val, bool state, int uses, int atk, int def, int spd);
 Consumable* createConsumable(unsigned int id, string name, string desc, int val, bool state, int uses, ConsumableType consType, int effectVal);
 Key* createKey(unsigned int id, string name, string desc, int val, bool state, int uses, unsigned int lockId);
@@ -52,10 +57,7 @@ vector<string> split(string data, string delimiter);
 
 /***Referenced Code End***/
 
-
-
-
-
+#pragma endregion
 
 int main()
 {

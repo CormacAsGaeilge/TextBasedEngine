@@ -55,7 +55,7 @@ bool checkIfCharacter(Room& currentRoom, string noun);
 DirectionType getDirection(int x);
 DirectionType getDirection(string s);
 
-vector<Room> loadRoomsFromFile();
+vector<Room> loadGameFromFile();
 string toLowerCase(string s);
 
 size_t getRoomIdWithPlayer(vector<Room>& allRooms);

@@ -62,7 +62,6 @@ vector<string> split(string data, string delimiter);
 int main()
 {
 	vector<Room> allRooms = loadRoomsFromFile();
-	cout << "test";
 	allRooms[0].print();
 	
 
@@ -283,14 +282,16 @@ DynamicItem* populateItem(string itemAsString, string delimiter)
 
 	ss << item[0];
 	ss >> itemId;
+	ss.clear();
 	name = item[1];
 	desc = item[2];
 	ss << item[3];
 	ss >> val;
+	ss.clear();
 	state = to_bool(item[4]);
 	ss << item[5];
 	ss >> uses;
-
+	ss.clear();
 	if (item.size() == 7)
 	{
 
@@ -379,7 +380,6 @@ vector<Room> loadRoomsFromFile()
 	string gameFile((std::istreambuf_iterator<char>(inFile)),
 		(std::istreambuf_iterator<char>()));
 	
-	cout << gameFile;
 
 	
 	vector<string> rooms = split(gameFile, "/");

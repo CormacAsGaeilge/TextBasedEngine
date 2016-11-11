@@ -48,7 +48,7 @@ void populateScenaryVector(vector<Scenary*>& scenaryVector, vector<string> scena
 void poulateConnectedRoomVector(vector<ConnectedRoom>& cRoomVector, vector<string> cRooms, string delimiter);
 
 DirectionType getDirection(int x);
-vector<Room> loadRoomsFromFile();
+vector<Room> loadGameFromFile();
 
 
 size_t getRoomIdWithPlayer(vector<Room>& allRooms);
@@ -65,7 +65,7 @@ vector<string> split(string data, string delimiter);
 
 int main()
 {
-	vector<Room> allRooms = loadRoomsFromFile();
+	vector<Room> allRooms = loadGameFromFile();
 	//allRooms[0].print();
 	Room *currentRoom = &allRooms[getRoomIdWithPlayer(allRooms)];
 	currentRoom->print();
@@ -74,6 +74,9 @@ int main()
 
 	system("pause");
 	return 0;
+
+	#pragma region Example of text file format
+
 	/*
 	***Rooms***
 	room/room/room/room
@@ -97,16 +100,16 @@ int main()
 	enemy|id|name|des|health|items|wallet|state|leftHand|rightHand~
 	or
 	npc|id|name|des|health|items|wallet|state|leftHand|rightHand~
-	
-		***Character items***
-		item#item#item#item
-		id,name,desc,val,state,uses#
-		or
-		id,name,desc,val,state,uses,consType,effectVal#
-		or
-		id,name,desc,val,state,uses,atk,def#
-		or
-		id,name,desc,val,state,uses,lockId#
+
+	***Character items***
+	item#item#item#item
+	id,name,desc,val,state,uses#
+	or
+	id,name,desc,val,state,uses,consType,effectVal#
+	or
+	id,name,desc,val,state,uses,atk,def#
+	or
+	id,name,desc,val,state,uses,lockId#
 
 	***Scenary***
 	scen~scen~scen~scene
@@ -143,7 +146,10 @@ int main()
 	vector<ConnectedRoom> connectedRooms;
 
 	Room house(5, "House", "Starting House", items, characters, scenary, connectedRooms);
-*/
+	*/
+
+	#pragma endregion
+
 }
 
 size_t getRoomIdWithPlayer(vector<Room>& allRooms)
@@ -437,7 +443,7 @@ Scenary* createScenary(unsigned int id, std::string name, std::string descriptio
 	return new Scenary(id, name, description, additionalDialogue, state);
 }
 
-vector<Room> loadRoomsFromFile()
+vector<Room> loadGameFromFile()
 {
 	stringstream ss;
 	unsigned int roomId = 0;

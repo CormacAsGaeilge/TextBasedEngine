@@ -1,3 +1,16 @@
-﻿  Main.cpp
-  TextBasedEngine.vcxproj -> I:\Projects\TextBasedEngine\TextBasedEngine\Debug\TextBasedEngine.exe
-  TextBasedEngine.vcxproj -> I:\Projects\TextBasedEngine\TextBasedEngine\Debug\TextBasedEngine.pdb (Partial PDB)
+﻿  Weapon.cpp
+  Scenary.cpp
+  Room.cpp
+  PlayerCharacter.cpp
+  Object.cpp
+  Main.cpp
+  Key.cpp
+  Item.cpp
+  EnemyCharacter.cpp
+  DynamicItem.cpp
+  Consumable.cpp
+  ConnectedRoom.cpp
+  Character.cpp
+  Generating Code...
+  TextBasedEngine.vcxproj -> C:\Users\Cormac\Desktop\TextBasedEngine\Debug\TextBasedEngine.exe
+  TextBasedEngine.vcxproj -> C:\Users\Cormac\Desktop\TextBasedEngine\Debug\TextBasedEngine.pdb (Partial PDB)

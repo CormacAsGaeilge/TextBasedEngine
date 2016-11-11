@@ -51,6 +51,10 @@ DirectionType getDirection(int x);
 vector<Room> loadRoomsFromFile();
 
 
+size_t getRoomIdWithPlayer(vector<Room>& allRooms);
+
+
+
 /***Referenced Code Start***/
 bool to_bool(string str);
 vector<string> split(string data, string delimiter);
@@ -62,8 +66,10 @@ vector<string> split(string data, string delimiter);
 int main()
 {
 	vector<Room> allRooms = loadRoomsFromFile();
-	allRooms[0].print();
-	
+	//allRooms[0].print();
+	Room *currentRoom = &allRooms[getRoomIdWithPlayer(allRooms)];
+	currentRoom->print();
+
 
 
 	system("pause");
@@ -140,6 +146,45 @@ int main()
 */
 }
 
+size_t getRoomIdWithPlayer(vector<Room>& allRooms)
+{
+	size_t size = allRooms.size();
+	for (size_t i=0; i<size; i++)
+	{
+		vector<Character*> chars = allRooms[i].getCharacters();
+		for (Character* c : chars)
+		{
+			if (c->getId() == 1)
+				return i;
+		}
+	}
+	return NULL;
+}
+
+void changeRoom(vector<Room>& allRooms, unsigned int currentRoomId, unsigned int destinationRoomId, DirectionType direction)
+{
+	vector<ConnectedRoom> cRooms = allRooms[currentRoomId].getConnectedRooms();
+	for (ConnectedRoom cR : cRooms)
+	{
+		if (cR.getRoomId() == destinationRoomId)
+		{
+			if (cR.getDirection() == direction)
+			{
+				allRooms[destinationRoomId]
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
 void poulateConnectedRoomVector(vector<ConnectedRoom>& cRoomVector, vector<string> cRooms,string delimiter)
 {
 	stringstream ss;
@@ -153,8 +198,10 @@ void poulateConnectedRoomVector(vector<ConnectedRoom>& cRoomVector, vector<strin
 		vector<string> connectedRoom = split(s, delimiter);
 		ss << connectedRoom[0];
 		ss >> roomId;
+		ss.clear();
 		ss << connectedRoom[1];
 		ss >> dir;
+		ss.clear();
 		direction = getDirection(dir);
 		isLocked = to_bool(connectedRoom[2]);
 		cRoomVector.push_back(ConnectedRoom(roomId, direction, isLocked));
@@ -196,6 +243,7 @@ void populateScenaryVector(vector<Scenary*>& scenaryVector, vector<string> scena
 		vector<string> scenaryPiece = split(s, delimiter);
 		ss << scenaryPiece[0];
 		ss >> sceneId;
+		ss.clear();
 		name = scenaryPiece[1];
 		desc = scenaryPiece[2];
 		additionalDialogue = scenaryPiece[3];
@@ -231,15 +279,18 @@ void populateCharacterVector(vector<Character*>& characterVector, vector<string>
 		character[0] = type;
 		ss << character[1];
 		ss >> charId;
+		ss.clear();
 		name = character[2];
 		desc = character[3];
 		ss << character[4];
 		ss >> health;
+		ss.clear();
 		vector<DynamicItem*> dynamicItems;
 		vector<string> items = split(character[5], "#");
 		populateItemVector(dynamicItems, items, ",");
 		ss << character[6];
 		ss >> wallet;
+		ss.clear();
 		state = to_bool(character[7]);
 		leftHand = character[8];
 		rightHand = character[9];
@@ -272,8 +323,8 @@ void populateItemVector(vector<DynamicItem*>& dynamicItems, vector<string>items,
 DynamicItem* populateItem(string itemAsString, string delimiter)
 {
 	stringstream ss;
-	int val, atk, def, spd, effectVal, uses;
-	unsigned int itemId, lockId;
+	int atk, def, spd, effectVal;
+	unsigned int itemId, lockId, val, uses;
 	string name, desc;
 	bool state;
 	ConsumableType consType;
@@ -292,9 +343,10 @@ DynamicItem* populateItem(string itemAsString, string delimiter)
 	ss << item[5];
 	ss >> uses;
 	ss.clear();
+
+
 	if (item.size() == 7)
 	{
-
 		//create Key
 		lockId = to_bool(item[6]);
 		return createKey(itemId, name, desc, val, state, uses, lockId);
@@ -307,6 +359,7 @@ DynamicItem* populateItem(string itemAsString, string delimiter)
 		consType = healthPotion;
 		ss << item[7];
 		ss >> effectVal;
+		ss.clear();
 		return createConsumable(itemId, name, desc, val, state, uses, consType, effectVal);
 	}
 	else if (item.size() == 9)
@@ -314,10 +367,13 @@ DynamicItem* populateItem(string itemAsString, string delimiter)
 		//create Weapon
 		ss << item[6];
 		ss >> atk;
+		ss.clear();
 		ss << item[7];
 		ss >> def;
+		ss.clear();
 		ss << item[8];
 		ss >> spd;
+		ss.clear();
 		return createWeapon(itemId, name, desc, val, state, uses, atk, def, spd);
 	}
 	else
@@ -380,6 +436,7 @@ vector<Room> loadRoomsFromFile()
 	string gameFile((std::istreambuf_iterator<char>(inFile)),
 		(std::istreambuf_iterator<char>()));
 	
+	cout << gameFile;
 
 	
 	vector<string> rooms = split(gameFile, "/");
@@ -392,6 +449,7 @@ vector<Room> loadRoomsFromFile()
 
 		ss >> roomVar[0];
 		ss << roomId;
+		ss.clear();
 		name = roomVar[1];
 		description = roomVar[2];
 		itemsString = roomVar[3];
@@ -437,6 +495,7 @@ bool to_bool(string str)
 	istringstream is(str);
 	bool b;
 	is >> std::boolalpha >> b;
+	is.clear();
 	return b;
 }
 

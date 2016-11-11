@@ -20,15 +20,15 @@ DynamicItem::~DynamicItem()
 
 void DynamicItem::setState(bool state)
 {
-	DynamicItem::state = (state != false) ? state : true;
+	DynamicItem::state = state;
 }
 
 void DynamicItem::setUses(unsigned int uses)
 {
-	DynamicItem::uses = (uses > -1) ? uses : 0;
+	DynamicItem::uses = (uses < 0) ? uses : 0;
 }
 void DynamicItem::print()
 {
 	Item::print();
-	std::cout << "\nUses\t" << DynamicItem::getUses();
+	std::cout << "\nUses\t" << DynamicItem::getUses() << std::endl;
 }

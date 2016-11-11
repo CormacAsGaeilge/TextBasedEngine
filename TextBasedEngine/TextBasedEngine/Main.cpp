@@ -51,6 +51,10 @@ DirectionType getDirection(int x);
 vector<Room> loadRoomsFromFile();
 
 
+size_t getRoomIdWithPlayer(vector<Room>& allRooms);
+Character* getPlayer(Room& currentRoom);
+
+
 /***Referenced Code Start***/
 bool to_bool(string str);
 vector<string> split(string data, string delimiter);
@@ -62,9 +66,10 @@ vector<string> split(string data, string delimiter);
 int main()
 {
 	vector<Room> allRooms = loadRoomsFromFile();
-	cout << "\ntest\n";
-	allRooms[0].print();
-	
+	//allRooms[0].print();
+	Room *currentRoom = &allRooms[getRoomIdWithPlayer(allRooms)];
+	currentRoom->print();
+
 
 
 	system("pause");
@@ -140,6 +145,60 @@ int main()
 	Room house(5, "House", "Starting House", items, characters, scenary, connectedRooms);
 */
 }
+
+size_t getRoomIdWithPlayer(vector<Room>& allRooms)
+{
+	size_t size = allRooms.size();
+	for (size_t i=0; i<size; i++)
+	{
+		Character* c;
+		c = getPlayer(allRooms[i]);
+		if (c != NULL)
+			return i;
+	}
+	return NULL;
+}
+
+Character* getPlayer(Room& currentRoom)
+{
+	vector<Character*> chars = currentRoom.getCharacters();
+	for (Character* c : chars)
+	{
+		if (c->getId() == 1)
+			return c;
+	}
+	return NULL;
+}
+
+void changeRoom(vector<Room>& allRooms, unsigned int currentRoomId, unsigned int destinationRoomId, DirectionType direction)
+{
+	vector<ConnectedRoom> cRooms = allRooms[currentRoomId].getConnectedRooms();
+	for (ConnectedRoom cR : cRooms)
+	{
+		if (cR.getRoomId() == destinationRoomId)
+		{
+			if (cR.getDirection() == direction)
+			{
+				Character* player = getPlayer(allRooms[currentRoomId]);
+				allRooms[destinationRoomId].addCharacter(player);
+				allRooms[currentRoomId].removeCharacter(player->getId());
+			}
+			else
+			{
+				cout << "No valid room in that direction" << endl;
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
 
 void poulateConnectedRoomVector(vector<ConnectedRoom>& cRoomVector, vector<string> cRooms,string delimiter)
 {
@@ -308,7 +367,6 @@ DynamicItem* populateItem(string itemAsString, string delimiter)
 
 	if (item.size() == 7)
 	{
-
 		//create Key
 		lockId = to_bool(item[6]);
 		return createKey(itemId, name, desc, val, state, uses, lockId);

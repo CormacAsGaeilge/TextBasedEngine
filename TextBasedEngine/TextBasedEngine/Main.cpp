@@ -190,10 +190,15 @@ DirectionType getDirection(int x)
 
 void populateScenaryVector(vector<Scenary*>& scenaryVector, vector<string> scenaryPieces, string delimiter)
 {
+	/*
+	1 | table | a varnished table | it is covered in old cutlery | true
+	*/
+
 	stringstream ss;
 	unsigned int sceneId;
 	string name, desc, additionalDialogue;
 	bool state;
+
 	for (string s : scenaryPieces)
 	{
 		vector<string> scenaryPiece = split(s, delimiter);
@@ -425,6 +430,8 @@ vector<Room> loadRoomsFromFile()
 
 		vector<Scenary*> scenaryVector;
 		vector<string> scenary = split(sceneString, "~");
+		for (string s : scenary)
+			cout << s << endl;
 		populateScenaryVector(scenaryVector, scenary, "|");
 
 		vector<ConnectedRoom> cRoomVector;

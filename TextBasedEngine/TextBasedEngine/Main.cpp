@@ -145,7 +145,7 @@ int main()
 	vector<Room> allRooms = loadGameFromFile();
 	//allRooms[0].print();
 	Room *currentRoom = &allRooms[getRoomIdWithPlayer(allRooms)];
-	currentRoom->print();
+	//currentRoom->print();
 
 	#pragma endregion
 
@@ -475,7 +475,7 @@ vector<Room> loadGameFromFile()
 	string gameFile((std::istreambuf_iterator<char>(inFile)),
 		(std::istreambuf_iterator<char>()));
 
-	cout << gameFile;
+	//cout << gameFile;
 
 
 	vector<string> rooms = split(gameFile, "/");
@@ -507,8 +507,6 @@ vector<Room> loadGameFromFile()
 
 		vector<Scenary*> scenaryVector;
 		vector<string> scenary = split(sceneString, "~");
-		for (string s : scenary)
-			cout << s << endl;
 		populateScenaryVector(scenaryVector, scenary, "|");
 
 		vector<ConnectedRoom> cRoomVector;

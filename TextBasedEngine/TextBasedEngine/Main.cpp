@@ -52,7 +52,7 @@ vector<Room> loadRoomsFromFile();
 
 
 size_t getRoomIdWithPlayer(vector<Room>& allRooms);
-
+Character* getPlayer(Room& currentRoom);
 
 
 /***Referenced Code Start***/
@@ -151,12 +151,21 @@ size_t getRoomIdWithPlayer(vector<Room>& allRooms)
 	size_t size = allRooms.size();
 	for (size_t i=0; i<size; i++)
 	{
-		vector<Character*> chars = allRooms[i].getCharacters();
-		for (Character* c : chars)
-		{
-			if (c->getId() == 1)
-				return i;
-		}
+		Character* c;
+		c = getPlayer(allRooms[i]);
+		if (c != NULL)
+			return i;
+	}
+	return NULL;
+}
+
+Character* getPlayer(Room& currentRoom)
+{
+	vector<Character*> chars = currentRoom.getCharacters();
+	for (Character* c : chars)
+	{
+		if (c->getId() == 1)
+			return c;
 	}
 	return NULL;
 }
@@ -170,7 +179,13 @@ void changeRoom(vector<Room>& allRooms, unsigned int currentRoomId, unsigned int
 		{
 			if (cR.getDirection() == direction)
 			{
-				allRooms[destinationRoomId]
+				Character* player = getPlayer(allRooms[currentRoomId]);
+				allRooms[destinationRoomId].addCharacter(player);
+				allRooms[currentRoomId].removeCharacter(player->getId());
+			}
+			else
+			{
+				cout << "No valid room in that direction" << endl;
 			}
 		}
 	}

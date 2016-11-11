@@ -97,7 +97,7 @@ void Room::removeCharacter(unsigned int characterId)
 	size_t size = Room::characters.size();
 	for (size_t i=0; i<size; i++)
 	{
-		if (Room::characters[i]->getId == characterId)
+		if (Room::characters[i]->getId() == characterId)
 			Room::characters.erase(Room::characters.begin()+i);
 	}
 }
@@ -106,7 +106,7 @@ void Room::removeItem(unsigned int itemId)
 	size_t size = Room::items.size();
 	for (size_t i = 0; i<size; i++)
 	{
-		if (Room::items[i]->getId == itemId)
+		if (Room::items[i]->getId() == itemId)
 			Room::items.erase(Room::items.begin() + i);
 	}
 }

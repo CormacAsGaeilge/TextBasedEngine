@@ -55,7 +55,7 @@ void Character::print()
 }
 void Character::printItemPouch()
 {
-	std::cout << "*****ITEM POUCH*****" << std::endl;
+	std::cout << "\n*****ITEM POUCH*****" << std::endl;
 	if (!Character::itemPouch.empty())
 	{
 		for (int i=0; i < (int)itemPouch.size(); i++)

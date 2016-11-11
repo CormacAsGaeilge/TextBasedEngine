@@ -1,5 +1,8 @@
-﻿  Room.cpp
-  LINK : I:\Projects\TextBasedEngine\TextBasedEngine\Debug\TextBasedEngine.exe not found or not built by the last incremental link; performing full link
-Item.obj : warning LNK4099: PDB 'vc140.pdb' was not found with 'Item.obj' or at 'I:\Projects\TextBasedEngine\TextBasedEngine\Debug\vc140.pdb'; linking object as if no debug info
-  TextBasedEngine.vcxproj -> I:\Projects\TextBasedEngine\TextBasedEngine\Debug\TextBasedEngine.exe
-  TextBasedEngine.vcxproj -> I:\Projects\TextBasedEngine\TextBasedEngine\Debug\TextBasedEngine.pdb (Partial PDB)
+﻿  Character.cpp
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  PlayerCharacter.cpp
+  EnemyCharacter.cpp
+  ConnectedRoom.cpp
+  TextBasedEngine.vcxproj -> C:\Users\WonkierHickory\Source\Repos\TextBasedEngine\TextBasedEngine\Debug\TextBasedEngine.exe
+  TextBasedEngine.vcxproj -> C:\Users\WonkierHickory\Source\Repos\TextBasedEngine\TextBasedEngine\Debug\TextBasedEngine.pdb (Partial PDB)

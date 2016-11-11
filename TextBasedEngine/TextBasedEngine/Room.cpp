@@ -45,7 +45,7 @@ void Room::setConnectedRooms(vector<ConnectedRoom> connectedRooms)
 
 void Room::print()
 {
-	cout << "***************Start of Room***************\nName:\t" << Room::getName() << endl;
+	cout << "***************Start of Room***************\nRoom Name:\t" << Room::getName() << endl;
 	cout << "Room Description:\n";
 	cout << Object::getDescription() << endl;
 	cout << "\n\nItems in Room:" << endl;

@@ -70,7 +70,14 @@ int main()
 	Room *currentRoom = &allRooms[getRoomIdWithPlayer(allRooms)];
 	currentRoom->print();
 
+	#pragma region Story
 
+	cout << "Now you begin your story." << endl;
+	allRooms[0].print();
+
+	#pragma endregion
+
+	
 
 	system("pause");
 	return 0;
@@ -152,10 +159,12 @@ int main()
 
 }
 
+#pragma region PlayerPosition
+
 size_t getRoomIdWithPlayer(vector<Room>& allRooms)
 {
 	size_t size = allRooms.size();
-	for (size_t i=0; i<size; i++)
+	for (size_t i = 0; i<size; i++)
 	{
 		Character* c;
 		c = getPlayer(allRooms[i]);
@@ -197,16 +206,35 @@ void changeRoom(vector<Room>& allRooms, unsigned int currentRoomId, unsigned int
 	}
 }
 
+DirectionType getDirection(int x)
+{
+	switch (x) {
+	case 0:
+		return North;
+	case 1:
+		return NorthEast;
+	case 2:
+		return East;
+	case 3:
+		return SouthEast;
+	case 4:
+		return South;
+	case 5:
+		return SouthWest;
+	case 6:
+		return West;
+	case 7:
+		return NorthWest;
+	default:
+		return North;
+	}
+}
 
+#pragma endregion
 
+#pragma region startGamePopulate
 
-
-
-
-
-
-
-void poulateConnectedRoomVector(vector<ConnectedRoom>& cRoomVector, vector<string> cRooms,string delimiter)
+void poulateConnectedRoomVector(vector<ConnectedRoom>& cRoomVector, vector<string> cRooms, string delimiter)
 {
 	stringstream ss;
 	int dir;
@@ -226,30 +254,6 @@ void poulateConnectedRoomVector(vector<ConnectedRoom>& cRoomVector, vector<strin
 		direction = getDirection(dir);
 		isLocked = to_bool(connectedRoom[2]);
 		cRoomVector.push_back(ConnectedRoom(roomId, direction, isLocked));
-	}
-}
-
-DirectionType getDirection(int x)
-{
-	switch (x) {
-	case 0 :
-		return North;
-	case 1 :
-		return NorthEast;
-	case 2 :
-		return East;
-	case 3 :
-		return SouthEast;
-	case 4 :
-		return South;
-	case 5 :
-		return SouthWest;
-	case 6 :
-		return West;
-	case 7 :
-		return NorthWest;
-	default:
-		return North;
 	}
 }
 
@@ -408,17 +412,21 @@ DynamicItem* populateItem(string itemAsString, string delimiter)
 	}
 }
 
+#pragma endregion
+
+#pragma region Create Classes
+
 Consumable* createConsumable(unsigned int id, string name, string desc, int val, bool state, int uses, ConsumableType consType, int effectVal)
 {
-	return new Consumable(id, name, desc, val, state, uses,  consType, effectVal);
+	return new Consumable(id, name, desc, val, state, uses, consType, effectVal);
 }
 
 Weapon* createWeapon(unsigned int id, string name, string desc, int val, bool state, int uses, int atk, int def, int spd)
 {
-	return new Weapon(id, name, desc, val, state, uses, atk, def,spd);
+	return new Weapon(id, name, desc, val, state, uses, atk, def, spd);
 }
 
-Key* createKey(unsigned int id, string name, string desc, int val, bool state, int uses, unsigned int lockId )
+Key* createKey(unsigned int id, string name, string desc, int val, bool state, int uses, unsigned int lockId)
 {
 	return new Key(id, name, desc, val, state, uses, lockId);
 }
@@ -435,13 +443,17 @@ EnemyCharacter* createEnemy(unsigned int id, string name, std::string descriptio
 
 PlayerCharacter* createPlayer(unsigned int id, string name, std::string description, unsigned int health, vector<DynamicItem*> itemPouch, unsigned int wallet, bool state, DynamicItem* equippedLeft, DynamicItem* equippedRight)
 {
-	return new PlayerCharacter(id,name,description,health,itemPouch,wallet,state,equippedLeft,equippedRight);
+	return new PlayerCharacter(id, name, description, health, itemPouch, wallet, state, equippedLeft, equippedRight);
 }
 
 Scenary* createScenary(unsigned int id, std::string name, std::string description, std::string additionalDialogue, bool state)
 {
 	return new Scenary(id, name, description, additionalDialogue, state);
 }
+
+#pragma endregion
+
+#pragma region loadGame
 
 vector<Room> loadGameFromFile()
 {
@@ -461,12 +473,12 @@ vector<Room> loadGameFromFile()
 	ifstream inFile("c:/temp/game.txt");
 	string gameFile((std::istreambuf_iterator<char>(inFile)),
 		(std::istreambuf_iterator<char>()));
-	
+
 	cout << gameFile;
 
-	
+
 	vector<string> rooms = split(gameFile, "/");
-	
+
 
 	for (string s : rooms)
 	{
@@ -509,15 +521,18 @@ vector<Room> loadGameFromFile()
 			scenaryVector,
 			cRoomVector));
 	}
-	
+
 	inFile.close();
 
 	return allRooms;
 }
 
+#pragma endregion
+
+#pragma region Sourced Code
 
 /******************************Code by Georg Fritzsche from http://stackoverflow.com/questions/3613284/c-stdstring-to-boolean *********************************/
-bool to_bool(string str) 
+bool to_bool(string str)
 {
 	transform(str.begin(), str.end(), str.begin(), ::tolower);
 	istringstream is(str);
@@ -543,3 +558,11 @@ vector<string> split(string data, string delimiter)
 	}
 	return outVector;
 }
+
+#pragma endregion
+
+
+
+
+
+

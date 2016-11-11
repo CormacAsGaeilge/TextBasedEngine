@@ -60,6 +60,7 @@ vector<string> split(string data, string delimiter);
 int main()
 {
 	vector<Room> allRooms = loadRoomsFromFile();
+	cout << "test";
 	allRooms[0].print();
 	
 
@@ -239,7 +240,8 @@ void populateCharacterVector(vector<Character*>& characterVector, vector<string>
 		ss << character[6];
 		ss >> wallet;
 		state = to_bool(character[7]);
-
+		leftHand = character[8];
+		rightHand = character[9];
 		if (type == "plr" && onlyOne == true)
 		{
 			//create Player
@@ -304,7 +306,7 @@ DynamicItem* populateItem(string itemAsString, string delimiter)
 		ss >> effectVal;
 		return createConsumable(itemId, name, desc, val, state, uses, consType, effectVal);
 	}
-	else
+	else if (item.size() == 9)
 	{
 		//create Weapon
 		ss << item[6];
@@ -314,6 +316,10 @@ DynamicItem* populateItem(string itemAsString, string delimiter)
 		ss << item[8];
 		ss >> spd;
 		return createWeapon(itemId, name, desc, val, state, uses, atk, def, spd);
+	}
+	else
+	{
+		return new DynamicItem(itemId, name, desc, val, state, uses);
 	}
 }
 

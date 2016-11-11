@@ -10,6 +10,8 @@ Character::Character(unsigned int id, std::string name, std::string description,
 	setItemPouch(itemPouch);
 	setWallet(wallet);
 	setState(state);
+	setLeftEquip(equippedLeft);
+	setRightEquip(equippedRight);
 }
 
 Character::Character() : Object()

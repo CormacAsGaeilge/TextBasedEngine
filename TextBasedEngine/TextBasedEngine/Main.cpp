@@ -89,13 +89,15 @@ int main()
 	#pragma endregion		
 
 	#pragma region Directions
+
 	int check = 0;
 	string verb, noun;
 	
 	while (check != 1)
 	{
 		cout << "Enter your command: ";
-		cin >> verb, noun;
+		cin >> verb;
+		cin >> noun;
 
 
 		verb = toLowerCase(verb);
@@ -153,13 +155,25 @@ int main()
 		}
 		else if (verb == "pickup")
 		{
-			//broken
+			vector<string> itemRoomList;
 			for (DynamicItem* dItem : currentRoom->getItems())
 			{
-				if (noun == dItem->getName())
+				itemRoomList.push_back(dItem->getName());
+			}
+
+
+			for (int i = 0; i < itemRoomList.size(); i++)
+			{
+				if (noun == itemRoomList[i])
 				{
 					cout << "The " << noun << " was added to your inventory" << endl;
-					
+					//need to push item to character item pounc
+					break;
+				}
+				else
+				{
+					cout << "There is no such item here" << endl;
+					break;
 				}
 			}
 		}

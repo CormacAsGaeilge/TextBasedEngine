@@ -43,7 +43,7 @@ void Character::setWallet(unsigned int wallet)
 
 void Character::setState(bool state)
 {
-	Character::state = (state != false) ? state : true;
+	Character::state = state;
 }
 
 void Character::print()

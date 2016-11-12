@@ -23,7 +23,7 @@ void Scenary::setAdditionalDialogue(std::string additionalDialogue)
 
 void Scenary::setState(bool state)
 {
-	Scenary::state = (state != false) ? state : true;
+	Scenary::state = state;
 }
 
 void Scenary::print()

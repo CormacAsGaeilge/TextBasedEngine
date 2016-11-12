@@ -23,5 +23,5 @@ void ConnectedRoom::setDirection(DirectionType direction)
 
 void ConnectedRoom::setIsLocked(bool isLocked)
 {
-	ConnectedRoom::isLocked = (isLocked != false) ? isLocked : true;
+	ConnectedRoom::isLocked = isLocked;
 }

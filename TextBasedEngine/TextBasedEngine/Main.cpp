@@ -73,6 +73,7 @@ vector<string> split(string data, string delimiter);
 int main()
 {
 	#pragma region Test
+
 	vector<Room> allRooms = loadGameFromFile();
 	//allRooms[0].print();
 	Room *currentRoom = &allRooms[getRoomIdWithPlayer(allRooms)];
@@ -202,9 +203,6 @@ bool checkIfRoom(vector<Room> allRooms, string noun)
 	}
 	return false;
 }
-
-
-
 
 size_t getRoomIdWithPlayer(vector<Room>& allRooms)
 {
@@ -635,9 +633,3 @@ vector<string> split(string data, string delimiter)
 }
 
 #pragma endregion
-
-
-
-
-
-

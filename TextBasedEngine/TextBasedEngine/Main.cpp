@@ -154,9 +154,9 @@ int main()
 		else if (verb == "pickup")
 		{
 			//broken
-			for (Room r : allRooms)
+			for (DynamicItem* dItem : currentRoom->getItems())
 			{
-				if (noun == currentRoom->getItems)
+				if (noun == dItem->getName())
 				{
 					cout << "The " << noun << " was added to your inventory" << endl;
 					

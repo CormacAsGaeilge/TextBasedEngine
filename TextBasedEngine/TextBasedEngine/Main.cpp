@@ -89,84 +89,103 @@ int main()
 	#pragma endregion		
 
 	#pragma region Directions
-
+	int check = 0;
 	string verb, noun;
-	cout << "Enter your command: ";
-	cin >> verb, noun;
-
-
-	verb = toLowerCase(verb);
-	noun = toLowerCase(noun);
-	if (verb == "go")
+	
+	while (check != 1)
 	{
-		if (checkIfRoom(allRooms, noun))
+		cout << "Enter your command: ";
+		cin >> verb, noun;
+
+
+		verb = toLowerCase(verb);
+		noun = toLowerCase(noun);
+		if (verb == "go")
 		{
-
-			DirectionType dir = getDirection(noun);
-
-			//check if more than one room in direction
-			unsigned int numOfRooms = 0, destinationId;
-			vector<ConnectedRoom*> connectedRoomIds;
-			for (ConnectedRoom cR : currentRoom->getConnectedRooms())
+			if (checkIfRoom(allRooms, noun))
 			{
-				if (cR.getDirection() == dir)
-				{
-					numOfRooms++;
-					connectedRoomIds.push_back(&cR);
-				}
-			}
-			if (numOfRooms == 0)
-				cout << "No rooms in that direction" << endl;
-			else if (numOfRooms == 1)
-			{
+
+				DirectionType dir = getDirection(noun);
+
+				//check if more than one room in direction
+				unsigned int numOfRooms = 0, destinationId;
+				vector<ConnectedRoom*> connectedRoomIds;
 				for (ConnectedRoom cR : currentRoom->getConnectedRooms())
 				{
 					if (cR.getDirection() == dir)
-						changeRoom(allRooms, currentRoom->getId(), cR.getRoomId(), dir);
+					{
+						numOfRooms++;
+						connectedRoomIds.push_back(&cR);
+					}
+				}
+				if (numOfRooms == 0)
+					cout << "No rooms in that direction" << endl;
+				else if (numOfRooms == 1)
+				{
+					for (ConnectedRoom cR : currentRoom->getConnectedRooms())
+					{
+						if (cR.getDirection() == dir)
+							changeRoom(allRooms, currentRoom->getId(), cR.getRoomId(), dir);
+					}
+				}
+				else
+				{
+					cout << "multiple rooms in this direction" << endl;
+					size_t vecSize = connectedRoomIds.size();
+					unsigned int i = 0, selectedRoomNumber;
+					for (Room r : allRooms)
+					{
+						if (r.getId() == connectedRoomIds[i]->getRoomId())
+						{
+							cout << "[" << i << "] - " << r.getName() << endl;
+							i++;
+						}
+					}
+					cout << "enter number of room:";
+					cin >> selectedRoomNumber;
+					destinationId = connectedRoomIds[selectedRoomNumber]->getRoomId();
+					changeRoom(allRooms, currentRoom->getId(), destinationId, dir);
 				}
 			}
 			else
+				cout << "verb go can only be used with direction" << endl;
+
+		}
+		else if (verb == "pickup")
+		{
+			//broken
+			for (Room r : allRooms)
 			{
-				cout << "multiple rooms in this direction" << endl;
-				size_t vecSize = connectedRoomIds.size();
-				unsigned int i = 0, selectedRoomNumber;
-				for (Room r : allRooms)
+				if (noun == currentRoom->getItems)
 				{
-					if (r.getId() == connectedRoomIds[i]->getRoomId())
-					{
-						cout << "[" << i << "] - " << r.getName() << endl;
-						i++;
-					}
+					cout << "The " << noun << " was added to your inventory" << endl;
+					
 				}
-				cout << "enter number of room:";
-				cin >> selectedRoomNumber;
-				destinationId = connectedRoomIds[selectedRoomNumber]->getRoomId();
-				changeRoom(allRooms, currentRoom->getId(), destinationId, dir);
 			}
 		}
+		else if (verb == "lookat")
+		{
+			
+		}
+		else if (verb == "use")
+		{
+		
+		}
+		else if (verb == "view")
+		{
+		
+		}
+		else if (verb == "help")
+		{
+			cout << "Keywords:" << endl;
+			cout << "Go ...\nPickup ...\nLookat ...\nUse ...\nView ..." << endl;
+			cout << "Directions:" << endl;
+			cout << "North\nWest\nEast\nSouth\nNorthWest\nNorthEast\nSouthWest\nSouthEast" << endl;
+		}
 		else
-			cout << "verb go can only be used with direction" << endl;
-
-	}
-	else if (verb == "pickup")
-	{
-
-	}
-	else if (verb == "lookat")
-	{
-
-	}
-	else if (verb == "use")
-	{
-
-	}
-	else if (verb == "view")
-	{
-
-	}
-	else
-	{
-
+		{
+			
+		}
 	}
 
 	#pragma endregion

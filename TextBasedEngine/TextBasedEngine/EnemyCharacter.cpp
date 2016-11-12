@@ -1,3 +1,7 @@
+/*Kieran Hoey & Cormac White
+Games Development Year 3
+D00163930 & D00163463*/
+
 #include "EnemyCharacter.h"
 
 EnemyCharacter::EnemyCharacter(unsigned int id, std::string name, std::string description, unsigned int health,

@@ -1,3 +1,7 @@
+/*Kieran Hoey & Cormac White
+Games Development Year 3
+D00163930 & D00163463*/
+
 #include "PlayerCharacter.h"
 #include <iostream>
 #include <string>

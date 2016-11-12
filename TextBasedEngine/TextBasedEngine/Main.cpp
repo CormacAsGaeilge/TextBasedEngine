@@ -69,6 +69,7 @@ vector<string> split(string data, string delimiter);
 /***Referenced Code End***/
 #pragma endregion
 
+#pragma region Main Game
 
 int main()
 {
@@ -207,6 +208,8 @@ int main()
 	system("pause");
 	return 0;
 }
+
+#pragma endregion
 
 #pragma region Character/Room
 

@@ -67,11 +67,12 @@ bool to_bool(string str);
 vector<string> split(string data, string delimiter);
 
 /***Referenced Code End***/
-
+#pragma endregion
 
 
 int main()
 {
+	#pragma region Test
 	vector<Room> allRooms = loadGameFromFile();
 	//allRooms[0].print();
 	Room *currentRoom = &allRooms[getRoomIdWithPlayer(allRooms)];
@@ -85,7 +86,9 @@ int main()
 	allRooms[0].print();
 
 	#pragma endregion		
-	
+
+	#pragma region Directions
+
 	string verb, noun;
 	cout << "Enter your command: ";
 	cin >> verb, noun;
@@ -164,9 +167,14 @@ int main()
 	{
 
 	}
+
+	#pragma endregion
+
 	system("pause");
 	return 0;
 }
+
+#pragma region Character/Room
 
 bool checkIfItem(Room& currentRoom, string noun)
 {
@@ -245,28 +253,6 @@ void changeRoom(vector<Room>& allRooms, unsigned int currentRoomId, unsigned int
 	}
 }
 
-void poulateConnectedRoomVector(vector<ConnectedRoom>& cRoomVector, vector<string> cRooms,string delimiter)
-{
-	stringstream ss;
-	int dir;
-	unsigned int roomId;
-	DirectionType direction;
-	bool isLocked;
-
-	for (string s : cRooms)
-	{
-		vector<string> connectedRoom = split(s, delimiter);
-		ss << connectedRoom[0];
-		ss >> roomId;
-		ss.clear();
-		ss << connectedRoom[1];
-		ss >> dir;
-		ss.clear();
-		direction = getDirection(dir);
-		isLocked = to_bool(connectedRoom[2]);
-		cRoomVector.push_back(ConnectedRoom(roomId, direction, isLocked));
-	}
-}
 
 DirectionType getDirection(int x)
 {
@@ -323,6 +309,34 @@ string toLowerCase(string s)
 		s[i]=tolower(s[i]);
 	return s;
 }
+
+#pragma endregion
+
+#pragma region Populate
+
+void poulateConnectedRoomVector(vector<ConnectedRoom>& cRoomVector, vector<string> cRooms, string delimiter)
+{
+	stringstream ss;
+	int dir;
+	unsigned int roomId;
+	DirectionType direction;
+	bool isLocked;
+
+	for (string s : cRooms)
+	{
+		vector<string> connectedRoom = split(s, delimiter);
+		ss << connectedRoom[0];
+		ss >> roomId;
+		ss.clear();
+		ss << connectedRoom[1];
+		ss >> dir;
+		ss.clear();
+		direction = getDirection(dir);
+		isLocked = to_bool(connectedRoom[2]);
+		cRoomVector.push_back(ConnectedRoom(roomId, direction, isLocked));
+	}
+}
+
 void populateScenaryVector(vector<Scenary*>& scenaryVector, vector<string> scenaryPieces, string delimiter)
 {
 	/*

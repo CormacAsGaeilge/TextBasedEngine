@@ -201,6 +201,7 @@ int main()
 		}
 		else if (verb == "lookat")
 		{
+			
 			if (noun == "inventory")
 			{
 				player->printItemPouch();
@@ -232,17 +233,87 @@ int main()
 						cout << "No piece of scenary with that name was found." << endl;
 				}
 			}
-			else if (noun == "character")
+			else if (noun == "characters")
 			{
-
+				string viewCharacters;
+				currentRoom->printCharacterNames();
+				cout << "Do you want to inspect any character? [y/n]" << endl;
+				cin >> viewCharacters;
+				if (viewCharacters == "y")
+				{
+					bool findCharacter = false;
+					cout << "Enter name of a character:";
+					cin >> viewCharacters;
+					for (Character* character : currentRoom->getCharacters())
+					{
+						if (character->getName() == viewCharacters)
+						{
+							character->print();
+							viewCharacters = true;
+						}
+					}
+					if (findCharacter == false)
+						cout << "No character with that name was found." << endl;
+				}
 			}
-			else if (noun == "item")
+			else if (noun == "items")
 			{
 
 			}
 			else
 			{
+				vector<string> itemRoomList;
+				for (DynamicItem* dItem : currentRoom->getItems())
+				{
+					if (dItem->getName() == noun)
+						itemRoomList.push_back(dItem->getName());
+				}
 
+				vector<string> characterRoomList;
+				for (Character* character : currentRoom->getCharacters())
+				{
+					if (character->getName() == noun)
+						characterRoomList.push_back(character->getName());
+				}
+
+				if (itemRoomList.size() > 0) 
+				{
+					for (size_t i = 0; i < itemRoomList.size(); i++)
+					{
+						if (noun == itemRoomList[i])
+						{
+							for (DynamicItem* dItem : currentRoom->getItems())
+							{
+								if (dItem->getName() == itemRoomList[i])
+									dItem->print();
+							}
+							break;
+						}
+						else {
+							cout << "There is no such item here" << endl;
+							break;
+						}
+					}
+				}
+				else if (characterRoomList.size() > 0)
+				{
+					for (size_t i = 0; i < characterRoomList.size(); i++)
+					{
+						if (noun == characterRoomList[i])
+						{
+							for (Character* character : currentRoom->getCharacters())
+							{
+								if (character->getName() == characterRoomList[i])
+									character->print();
+							}
+							break;
+						}
+						else {
+							cout << "There is no such character here" << endl;
+							break;
+						}
+					}
+				}
 			}
 		}
 		else if (verb == "use")

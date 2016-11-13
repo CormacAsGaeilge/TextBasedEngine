@@ -17,7 +17,8 @@ ConnectedRoom::~ConnectedRoom()
 
 void ConnectedRoom::setRoomID(unsigned int roomId)
 {
-	ConnectedRoom::roomId = (roomId > 0) ? roomId : 1;
+	//ConnectedRoom::roomId = (roomId > -1) ? roomId : 1;
+	ConnectedRoom::roomId = roomId;
 }
 
 void ConnectedRoom::setDirection(DirectionType direction)

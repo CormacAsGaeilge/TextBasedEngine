@@ -451,13 +451,25 @@ int main()
 		}
 		else if (verb == "view")
 		{
-			if (noun == "health")
+			if (noun == "stats")
 			{
-
+				int wealthValue=0;
+				for (DynamicItem* dItem : player->getItemPouch())
+					wealthValue += dItem->getValue();
+				cout << "Number of unique rooms visited :\t" << "visits" << endl;
+				cout << "Number of items in inventory :\t" << player->getItemPouch().size() << endl;
+				cout << "Number of times items have been used :\t" << "uses" << endl;
+				cout << "Total value of items in inventory :\t" << wealthValue << " coins" << endl;
+				cout << "Current Health :\t" << player->getHealth() << "/100" << endl;
+				cout << "Current Wealth :\t" << player->getWallet() << " coins" << endl;
+			}
+			else if (noun == "health")
+			{
+				cout << "Current Health :\t" << player->getHealth() <<"/100" << endl;
 			}
 			else if (noun == "wallet")
 			{
-
+				cout << "Current Wealth :\t" << player->getWallet() << " coins" << endl;
 			}
 		}
 		else if (verb == "help")

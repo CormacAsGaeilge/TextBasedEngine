@@ -24,6 +24,7 @@
     <ClCompile Include="Consumable.cpp" />
     <ClCompile Include="DynamicItem.cpp" />
     <ClCompile Include="EnemyCharacter.cpp" />
+    <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Key.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -41,14 +42,19 @@
     <ClInclude Include="DirectionType.h" />
     <ClInclude Include="DynamicItem.h" />
     <ClInclude Include="EnemyCharacter.h" />
+    <ClInclude Include="Engine.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="PlayerCharacter.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="resource1.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="Scenary.h" />
     <ClInclude Include="Weapon.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TextBasedEngine.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{A5670EC7-2743-45F9-8E61-9CA1D5A3B854}</ProjectGuid>

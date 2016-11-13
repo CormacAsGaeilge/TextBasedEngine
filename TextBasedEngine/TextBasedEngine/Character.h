@@ -31,7 +31,7 @@ public:
 	void pickUp(DynamicItem* item);
 	virtual void print();
 	void printItemPouch();
-
+	void softPrintItemPouch();
 private:
 	unsigned int health;
 	std::vector<DynamicItem*> itemPouch;

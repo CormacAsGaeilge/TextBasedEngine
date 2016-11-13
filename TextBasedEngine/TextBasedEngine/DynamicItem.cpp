@@ -36,3 +36,17 @@ void DynamicItem::print()
 	Item::print();
 	std::cout << "\nUses\t" << DynamicItem::getUses() << std::endl << std::endl;
 }
+void DynamicItem::useItem()
+{
+	if (DynamicItem::getUses() > 0)
+	{
+		std::cout << DynamicItem::getName() << " was used." << std::endl;
+		DynamicItem::setUses(DynamicItem::getUses() - 1);
+	}
+	else
+	{
+		std::cout << DynamicItem::getName() << " is broken. It cannot be used." << std::endl;
+		DynamicItem::setState(false);
+	}
+
+}

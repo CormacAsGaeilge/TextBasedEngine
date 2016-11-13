@@ -80,6 +80,22 @@ void Character::printItemPouch()
 	std::cout << std::endl;
 }
 
+void Character::softPrintItemPouch()
+{
+	std::cout << "\n*****ITEM POUCH*****" << std::endl;
+	if (!Character::itemPouch.empty())
+	{
+		for (int i = 0; i < (int)itemPouch.size(); i++)
+		{
+			std::cout << itemPouch.at(i)->getName() << std::endl;
+		}
+	}
+	else
+	{
+		std::cout << "Empty Pouch" << std::endl;
+	}
+}
+
 void Character::pickUp(DynamicItem* item)
 {
 	std::cout << "You picked up the " << item->getName() << std::endl;

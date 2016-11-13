@@ -258,7 +258,26 @@ int main()
 			}
 			else if (noun == "items")
 			{
-
+				string viewItems;
+				currentRoom->printItemNames();
+				cout << "Do you want to inspect any item? [y/n]" << endl;
+				cin >> viewItems;
+				if (viewItems == "y")
+				{
+					bool findItem = false;
+					cout << "Enter name of item:";
+					cin >> viewItems;
+					for (DynamicItem* dItem : currentRoom->getItems())
+					{
+						if (dItem->getName() == viewItems)
+						{
+							dItem->print();
+							viewItems = true;
+						}
+					}
+					if (findItem == false)
+						cout << "No item with that name was found." << endl;
+				}
 			}
 			else
 			{
@@ -274,6 +293,13 @@ int main()
 				{
 					if (character->getName() == noun)
 						characterRoomList.push_back(character->getName());
+				}
+
+				vector<string> sceneryRoomList;
+				for (Scenary* scene : currentRoom->getScenary())
+				{
+					if (scene->getName() == noun)
+						sceneryRoomList.push_back(scene->getName());
 				}
 
 				if (itemRoomList.size() > 0) 
@@ -314,11 +340,87 @@ int main()
 						}
 					}
 				}
+				else if (sceneryRoomList.size() > 0)
+				{
+					for (size_t i = 0; i < sceneryRoomList.size(); i++)
+					{
+						if (noun == sceneryRoomList[i])
+						{
+							for (Scenary* scene : currentRoom->getScenary())
+							{
+								if (scene->getName() == sceneryRoomList[i])
+									scene->print();
+							}
+							break;
+						}
+						else {
+							cout << "There is no scenery with that name here" << endl;
+							break;
+						}
+					}
+				}
+				else
+				{
+					cout << "There is nothing with that name here" << endl;
+				}
 			}
 		}
 		else if (verb == "use")
 		{
-		
+			if (noun == "item")
+			{
+				string viewItems;
+				player->softPrintItemPouch();
+				cout << "Do you want to inspect any item? [y/n]" << endl;
+				cin >> viewItems;
+				if (viewItems == "y")
+				{
+					bool findItem = false;
+					cout << "Enter name of item:";
+					cin >> viewItems;
+					for (DynamicItem* dItem : player->getItemPouch())
+					{
+						if (dItem->getName() == viewItems)
+						{
+							dItem->print();
+							viewItems = true;
+						}
+					}
+					if (findItem == false)
+						cout << "No item with that name was found in inventory." << endl;
+				}
+			}
+			else
+			{
+				vector<string> itemInventoryList;
+				for (DynamicItem* dItem : player->getItemPouch())
+				{
+					if (dItem->getName() == noun)
+						itemInventoryList.push_back(dItem->getName());
+				}
+
+				if (itemInventoryList.size() > 0)
+				{
+					for (size_t i = 0; i < itemInventoryList.size(); i++)
+					{
+						if (noun == itemInventoryList[i])
+						{
+							for (DynamicItem* dItem : player->getItemPouch())
+							{
+								if (dItem->getName() == itemInventoryList[i])
+									dItem->useItem();
+							}
+							break;
+						}
+						else {
+							cout << "There is no such item in inventory" << endl;
+							break;
+						}
+					}
+				}
+				else
+					cout << "There is no such item in inventory" << endl;
+			}
 		}
 		else if (verb == "view")
 		{

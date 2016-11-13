@@ -4,7 +4,7 @@ Create a text based adventure without having to code it! (Kinda)
 Create your rooms, characters and items and place them in a text file and this engine will load a text based adventure from it.
 
 
-<h2><b>Version 1.0:-</b></h2>
+<h2><b>Version 1.0.2:-</b></h2>
   - Create weapons, consumbables, keys, dynamic items, scenery, characters(npc,enemy and player) and rooms from text file
   - Use Verb/noun commands
   - "go" command - lets you move the player character from the room it is in to any connected rooms

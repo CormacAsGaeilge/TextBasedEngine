@@ -72,6 +72,48 @@ void Room::print()
 	cout << "\n****************End of Room****************" << endl;
 }
 
+void Room::softPrint()
+{
+	cout << "***************Start of Room***************\nRoom Name:\t" << Room::getName() << endl;
+	cout << "Room Description:\n";
+	cout << Object::getDescription() << endl;
+	Room::printItemNames();
+	Room::printScenaryNames();
+	Room::printCharacterNames();
+	Room::printConnectedRoomNames();
+	cout << "\n****************End of Room****************" << endl;
+}
+
+void Room::printItemNames()
+{
+	cout << "Items: There are " << Room::items.size() << "." << endl;
+	for (DynamicItem* ptr : Room::getItems())
+		cout << "Item Name: " << ptr->getName() << endl;
+	cout << "******end of items******" << endl;
+}
+
+void Room::printScenaryNames()
+{
+	cout << "Scenary: There are " << Room::items.size() << "." << endl;
+	for (Scenary* ptr : Room::getScenary())
+		cout << "Scenary Name: " << ptr->getName() << endl;
+	cout << "******end of scenary******" << endl;
+}
+
+void Room::printCharacterNames()
+{
+	cout << "Characters: There are " << Room::items.size() << "." << endl;
+	for (Character* ptr : Room::getCharacters())
+		cout << "Character Name: " << ptr->getName() << endl;
+	cout << "******end of characters******" << endl;
+}
+
+void Room::printConnectedRoomNames()
+{
+	cout << "Connecting rooms: There are " << Room::items.size() << "." << endl;
+	cout << "******end of connecting rooms******" << endl;
+}
+
 void Room::printItems()
 {
 	for (DynamicItem* ptr : Room::getItems())
@@ -130,6 +172,9 @@ void Room::removeItem(unsigned int itemId)
 	for (size_t i = 0; i<size; i++)
 	{
 		if (Room::items[i]->getId() == itemId)
+		{
 			Room::items.erase(Room::items.begin() + i);
+			i++;
+		}
 	}
 }

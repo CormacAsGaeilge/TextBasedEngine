@@ -28,7 +28,7 @@ public:
 	void setState(bool state);
 	void setLeftEquip(DynamicItem* equippedLeft) { Character::equippedLeft = equippedLeft; }
 	void setRightEquip(DynamicItem* equippedRight) { Character::equippedRight = equippedRight; }
-
+	void pickUp(DynamicItem* item);
 	virtual void print();
 	void printItemPouch();
 

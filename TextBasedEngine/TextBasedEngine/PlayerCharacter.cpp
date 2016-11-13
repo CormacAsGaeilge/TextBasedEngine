@@ -14,6 +14,10 @@ PlayerCharacter::PlayerCharacter(unsigned int id, std::string name, std::string 
 
 }
 
+PlayerCharacter::PlayerCharacter(Character character)
+{
+
+}
 PlayerCharacter::~PlayerCharacter()
 {
 
@@ -26,9 +30,7 @@ void PlayerCharacter::print()
 
 void PlayerCharacter::interaction(std::string action, DynamicItem item)
 {
-	if (action == "PickUp")
-		pickUp(item);
-	else if (action == "Search")
+	if (action == "Search")
 		search();
 	else if (action == "Use")
 		use(item);
@@ -38,10 +40,7 @@ void PlayerCharacter::interaction(std::string action, DynamicItem item)
 		lookAt(item);
 }
 
-void PlayerCharacter::pickUp(DynamicItem item)
-{
-	std::cout << "You picked up the " << item.getName() << std::endl;
-}
+
 
 void PlayerCharacter::search()
 {

@@ -39,6 +39,12 @@ public:
 	void printCharacters();
 	void printConnectedRooms();
 
+	void softPrint();
+	void printItemNames();
+	void printScenaryNames();
+	void printCharacterNames();
+	void printConnectedRoomNames();
+
 private:
 	std::vector<DynamicItem*> items;
 	std::vector<Character*> characters;

@@ -57,6 +57,7 @@ void Character::print()
 	Character::printItemPouch();
 
 }
+
 void Character::printItemPouch()
 {
 	std::cout << "\n*****ITEM POUCH*****" << std::endl;
@@ -77,4 +78,10 @@ void Character::printItemPouch()
 	std::cout << "\nRight Hand\t";
 	Character::getRightEquip()->print();
 	std::cout << std::endl;
+}
+
+void Character::pickUp(DynamicItem* item)
+{
+	std::cout << "You picked up the " << item->getName() << std::endl;
+	Character::itemPouch.push_back(item);
 }

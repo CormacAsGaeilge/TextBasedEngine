@@ -85,6 +85,7 @@ int main()
 	loadGameFromFile(allRooms);
 	//allRooms[0].print();
 	Room *currentRoom = &allRooms[getRoomIdWithPlayer(allRooms)];
+	Character* player;
 	//currentRoom->print();
 
 	#pragma endregion
@@ -103,6 +104,7 @@ int main()
 	
 	while (check != 1)
 	{
+		player = getPlayer(*currentRoom);
 		cout << "Enter your command: ";
 		cin >> verb;
 		cin >> noun;
@@ -171,17 +173,23 @@ int main()
 		{
 			vector<string> itemRoomList;
 			for (DynamicItem* dItem : currentRoom->getItems())
-			{
 				itemRoomList.push_back(dItem->getName());
-			}
 
 
-			for (int i = 0; i < itemRoomList.size(); i++)
+			for (size_t i = 0; i < itemRoomList.size(); i++)
 			{
 				if (noun == itemRoomList[i])
 				{
 					cout << "The " << noun << " was added to your inventory" << endl;
 					//need to push item to character item pounc
+					for (DynamicItem* dItem : currentRoom->getItems())
+					{
+						if (dItem->getName() == itemRoomList[i])
+						{
+							player->pickUp(dItem);
+							currentRoom->removeItem(dItem->getId());
+						}
+					}
 					break;
 				}
 				else
@@ -193,7 +201,49 @@ int main()
 		}
 		else if (verb == "lookat")
 		{
-			
+			if (noun == "inventory")
+			{
+				player->printItemPouch();
+			}
+			else if (noun == "room")
+			{
+				currentRoom->softPrint();
+			}
+			else if (noun == "scenary")
+			{
+				string viewScenary;
+				currentRoom->printScenaryNames();
+				cout << "Do you want to investigate any piece of Scenary? [y/n]" << endl;
+				cin >> viewScenary;
+				if (viewScenary == "y")
+				{
+					bool findScenary = false;
+					cout << "Enter name of scenary:";
+					cin >> viewScenary;
+					for (Scenary* sc : currentRoom->getScenary())
+					{
+						if (sc->getName() == viewScenary)
+						{
+							sc->print();
+							findScenary = true;
+						}
+					}
+					if (findScenary == false)
+						cout << "No piece of scenary with that name was found." << endl;
+				}
+			}
+			else if (noun == "character")
+			{
+
+			}
+			else if (noun == "item")
+			{
+
+			}
+			else
+			{
+
+			}
 		}
 		else if (verb == "use")
 		{
@@ -317,7 +367,7 @@ bool checkIfDirection(string s)
 	else if (s == "east")
 		return true;
 	else if (s == "southeast")
-		return SouthEast;
+		return true;
 	else if (s == "south")
 		return true;
 	else if (s == "southwest")

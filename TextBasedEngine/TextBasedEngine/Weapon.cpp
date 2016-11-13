@@ -42,3 +42,32 @@ void Weapon::print()
 	DynamicItem::print();
 	std::cout << "\nAttack\t" << Weapon::getAttack() << "\nDefense\t" << Weapon::getDefense() << std::endl;
 }
+void Weapon::useItem()
+{
+	DynamicItem::useItem();
+	/*if (DynamicItem::getState() == true)
+	{
+		std::string name;
+		std::cout << "Enter which character to use weapon on:";
+		std::cin >> name;
+		for (Character* c : currentRoom->getCharacters())
+		{
+			if (c->getName() == name)
+			{
+				if (c->getState() == true)
+				{
+					std::cout << "You attacked " << name << " with the " << DynamicItem::getName() << " dealing " << Weapon::getAttack() << " damage." << std::endl;
+					c->setHealth(c->getHealth() - Weapon::getAttack());
+					if (c->getHealth() <= 0)
+						c->setState(false);
+				}
+				else
+				{
+					std::cout << c->getName() << " is dead." << std::endl;
+				}
+			}
+		}
+	}*/
+
+	std::cout << "You attacked with the " << DynamicItem::getName() << " dealing " << Weapon::getAttack() << " damage." << std::endl;
+}

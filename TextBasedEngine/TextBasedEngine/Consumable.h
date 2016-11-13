@@ -17,6 +17,7 @@ public:
 	void setConsumableType(ConsumableType consumableType);
 	void setEffectValue(int effectValue);
 	void print() override;
+	void useItem() override;
 private:
 	ConsumableType consumableType;
 	int effectValue;

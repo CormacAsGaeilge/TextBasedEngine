@@ -31,3 +31,10 @@ void Key::print()
 	DynamicItem::print();
 	std::cout << "\nLockId\t" << Key::getLockId() << std::endl;
 }
+
+void Key::useItem()
+{
+	DynamicItem::useItem();
+	std::cout << "You try to use the key but it fails." << std::endl;
+
+}

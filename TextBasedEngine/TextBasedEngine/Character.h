@@ -4,7 +4,7 @@ D00163930 & D00163463*/
 
 #pragma once
 #include "Object.h"
-#include "Weapon.h"
+#include "DynamicItem.h"
 #include <vector>
 #include <memory>
 class Character : public Object

@@ -17,7 +17,7 @@ public:
 	void setState(bool state);
 	void setUses(unsigned int uses);
 	virtual void print() override;
-	void useItem();
+	virtual void useItem();
 private:
 	bool state;
 	unsigned int uses;

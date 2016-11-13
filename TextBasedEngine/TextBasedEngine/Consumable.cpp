@@ -36,3 +36,13 @@ void Consumable::print()
 	DynamicItem::print();
 	std::cout << "\nConsumableType\t" << Consumable::getConsumableType() << "\nEffect Value\t" << Consumable::getEffectValue()<<std::endl;
 }
+void Consumable::useItem()
+{
+	DynamicItem::useItem();
+	if(Consumable::consumableType == healthPotion)
+		std::cout << "The " << Consumable::getName() << " is consumed and your health increases by " << Consumable::getEffectValue() << "." << std::endl;
+	else
+	{
+		std::cout << "The " << Consumable::getName() << " is consumed and your health decreases by " << Consumable::getEffectValue() << "." << std::endl;
+	}
+}

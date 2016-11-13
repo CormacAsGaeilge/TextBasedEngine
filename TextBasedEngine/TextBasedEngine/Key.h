@@ -14,6 +14,7 @@ public:
 	unsigned int getLockId() const { return lockId; }
 	void setLockId(unsigned int lockId);
 	void print() override;
+	void useItem() override;
 private:
 	unsigned int lockId;
 };

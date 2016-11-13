@@ -20,6 +20,7 @@ public:
 	void setDefense(unsigned int defense);
 	void setSpeed(unsigned int speed);
 	void print() override;
+	void useItem() override;
 private:
 	unsigned int attack,defense,speed;
 };

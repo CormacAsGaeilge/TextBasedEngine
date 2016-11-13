@@ -18,16 +18,19 @@ Consumable::Consumable(unsigned int id, std::string name, std::string descriptio
 
 Consumable::~Consumable()
 {
+
 }
 
 void Consumable::setConsumableType(ConsumableType consumableType)
 {
 	Consumable::consumableType = consumableType;
 }
+
 void Consumable::setEffectValue(int effectValue) 
 {
 	Consumable::effectValue = (effectValue > 0) ? effectValue : 10;
 }
+
 void Consumable::print()
 {
 	DynamicItem::print();

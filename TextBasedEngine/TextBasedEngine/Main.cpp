@@ -81,13 +81,13 @@ int main()
 	#pragma region Test
 
 	vector<Room> allRooms;
-		
+	vector<int> roomIdVisited;
 	loadGameFromFile(allRooms);
 	//allRooms[0].print();
 	Room *currentRoom = &allRooms[getRoomIdWithPlayer(allRooms)];
 	Character* player;
 	//currentRoom->print();
-
+	roomIdVisited.push_back(currentRoom->getId());
 	#pragma endregion
 
 	#pragma region Story
@@ -134,35 +134,48 @@ int main()
 				}
 				if (numOfRooms == 0)
 					cout << "No rooms due " << noun << "." << endl;
-				else if (numOfRooms == 1)
-				{
-					for (ConnectedRoom cR : currentRoom->getConnectedRooms())
+				else {
+
+
+
+					if (numOfRooms == 1)
 					{
-						if (cR.getDirection() == dir)
+						for (ConnectedRoom cR : currentRoom->getConnectedRooms())
 						{
-							changeRoom(allRooms, currentRoom->getId(), cR.getRoomId(), dir);
-							currentRoom = &allRooms[cR.getRoomId()];
-							cout << "You are now in " << currentRoom->getName() <<"." << endl;
+							if (cR.getDirection() == dir)
+							{
+								changeRoom(allRooms, currentRoom->getId(), cR.getRoomId(), dir);
+								currentRoom = &allRooms[cR.getRoomId()];
+								cout << "You are now in " << currentRoom->getName() << "." << endl;
+							}
 						}
 					}
-				}
-				else
-				{
-					cout << "multiple rooms in this direction" << endl;
-					size_t vecSize = connectedRoomIds.size();
-					unsigned int i = 0, selectedRoomNumber;
-					for (Room r : allRooms)
+					else
 					{
-						if (r.getId() == connectedRoomIds[i]->getRoomId())
+						cout << "multiple rooms in this direction" << endl;
+						size_t vecSize = connectedRoomIds.size();
+						unsigned int i = 0, selectedRoomNumber;
+						for (Room r : allRooms)
 						{
-							cout << "[" << i << "] - " << r.getName() << endl;
-							i++;
+							if (r.getId() == connectedRoomIds[i]->getRoomId())
+							{
+								cout << "[" << i << "] - " << r.getName() << endl;
+								i++;
+							}
 						}
+						cout << "enter number of room:";
+						cin >> selectedRoomNumber;
+						destinationId = connectedRoomIds[selectedRoomNumber]->getRoomId();
+						changeRoom(allRooms, currentRoom->getId(), destinationId, dir);
 					}
-					cout << "enter number of room:";
-					cin >> selectedRoomNumber;
-					destinationId = connectedRoomIds[selectedRoomNumber]->getRoomId();
-					changeRoom(allRooms, currentRoom->getId(), destinationId, dir);
+					bool roomVisited = false;
+					for (int id : roomIdVisited)
+					{
+						if (id == currentRoom->getId())
+							roomVisited = true;
+					}
+					if (roomVisited == false)
+						roomIdVisited.push_back(currentRoom->getId());
 				}
 			}
 			else
@@ -456,7 +469,7 @@ int main()
 				int wealthValue=0;
 				for (DynamicItem* dItem : player->getItemPouch())
 					wealthValue += dItem->getValue();
-				cout << "Number of unique rooms visited :\t" << "visits" << endl;
+				cout << "Number of unique rooms visited :\t" << roomIdVisited.size() << endl;
 				cout << "Number of items in inventory :\t" << player->getItemPouch().size() << endl;
 				cout << "Number of times items have been used :\t" << "uses" << endl;
 				cout << "Total value of items in inventory :\t" << wealthValue << " coins" << endl;

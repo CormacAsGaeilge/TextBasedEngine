@@ -4,6 +4,7 @@ D00163930 & D00163463*/
 
 #pragma once
 #include "DirectionType.h"
+#include <string>
 class ConnectedRoom
 {
 public:
@@ -15,6 +16,7 @@ public:
 	void setRoomID(unsigned int roomId);
 	void setDirection(DirectionType direction);
 	void setIsLocked(bool isLocked);
+	std::string directionToString();
 private:
 	unsigned int roomId;
 	DirectionType direction;

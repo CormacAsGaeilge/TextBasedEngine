@@ -30,3 +30,29 @@ void ConnectedRoom::setIsLocked(bool isLocked)
 {
 	ConnectedRoom::isLocked = isLocked;
 }
+
+std::string ConnectedRoom::directionToString()
+{
+	int dir = ConnectedRoom::getDirection();
+	switch (dir)
+	{
+	case 0:
+		return "north";
+	case 1:
+		return "northeast";
+	case 2:
+		return "east";
+	case 3:
+		return "southeast";
+	case 4:
+		return "south";
+	case 5:
+		return "southwest";
+	case 6:
+		return "west";
+	case 7:
+		return "northwest";
+	default:
+		return "error";
+	}
+}

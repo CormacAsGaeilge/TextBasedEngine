@@ -142,10 +142,12 @@ void Room::addCharacter(Character* character)
 {
 	Room::characters.push_back(character);
 }
+
 void Room::addItem(DynamicItem* item)
 {
 	Room::items.push_back(item);
 }
+
 void Room::removeCharacter(unsigned int characterId)
 {
 	size_t size = Room::characters.size();
@@ -166,6 +168,7 @@ void Room::removeCharacter(unsigned int characterId)
 		i++;
 	}*/
 }
+
 void Room::removeItem(unsigned int itemId)
 {
 	size_t size = Room::items.size();

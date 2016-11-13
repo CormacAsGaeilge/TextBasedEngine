@@ -97,7 +97,7 @@ int main()
 
 	#pragma endregion		
 
-	#pragma region Directions
+	#pragma region Game
 
 	int check = 0;
 	string verb, noun;

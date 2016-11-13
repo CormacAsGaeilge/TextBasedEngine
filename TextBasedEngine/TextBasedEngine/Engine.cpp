@@ -40,8 +40,6 @@ void Engine::run(Character* player, Room* currentRoom , vector<Room> allRooms, v
 						numOfRooms++;
 						connectedRoomIds.push_back(&cR);
 					}
-					else
-						cout << "test" << endl;
 				}
 				if (numOfRooms == 0)
 					cout << "No rooms due " << noun << "." << endl;
@@ -97,7 +95,7 @@ void Engine::run(Character* player, Room* currentRoom , vector<Room> allRooms, v
 		{
 			vector<string> itemRoomList;
 			for (DynamicItem* dItem : currentRoom->getItems())
-				itemRoomList.push_back(dItem->getName());
+				itemRoomList.push_back(Engine::toLowerCase(dItem->getName()));
 
 
 			for (size_t i = 0; i < itemRoomList.size(); i++)
@@ -108,7 +106,7 @@ void Engine::run(Character* player, Room* currentRoom , vector<Room> allRooms, v
 					//need to push item to character item pounc
 					for (DynamicItem* dItem : currentRoom->getItems())
 					{
-						if (dItem->getName() == itemRoomList[i])
+						if (Engine::toLowerCase(dItem->getName()) == itemRoomList[i])
 						{
 							player->pickUp(dItem);
 							currentRoom->removeItem(dItem->getId());
@@ -191,9 +189,10 @@ void Engine::run(Character* player, Room* currentRoom , vector<Room> allRooms, v
 					bool findItem = false;
 					cout << "Enter name of item:";
 					cin >> viewItems;
+					viewItems = (Engine::toLowerCase(viewItems));
 					for (DynamicItem* dItem : currentRoom->getItems())
 					{
-						if (dItem->getName() == viewItems)
+						if (Engine::toLowerCase(dItem->getName()) == viewItems)
 						{
 							dItem->print();
 							viewItems = true;
@@ -209,26 +208,26 @@ void Engine::run(Character* player, Room* currentRoom , vector<Room> allRooms, v
 				vector<string> itemInventoryList;
 				for (DynamicItem* dItem : currentRoom->getItems())
 				{
-					if (dItem->getName() == noun)
-						itemRoomList.push_back(dItem->getName());
+					if (Engine::toLowerCase(dItem->getName()) == noun)
+						itemRoomList.push_back(Engine::toLowerCase(dItem->getName()));
 				}
 				for (DynamicItem* dItem : player->getItemPouch())
 				{
-					if (dItem->getName() == noun)
-						itemInventoryList.push_back(dItem->getName());
+					if (Engine::toLowerCase(dItem->getName()) == noun)
+						itemInventoryList.push_back(Engine::toLowerCase(dItem->getName()));
 				}
 
 				vector<string> characterRoomList;
 				for (Character* character : currentRoom->getCharacters())
 				{
-					if (character->getName() == noun)
-						characterRoomList.push_back(character->getName());
+					if (Engine::toLowerCase(character->getName()) == noun)
+						characterRoomList.push_back(Engine::toLowerCase(character->getName()));
 				}
 
 				vector<string> sceneryRoomList;
 				for (Scenary* scene : currentRoom->getScenary())
 				{
-					if (scene->getName() == noun)
+					if (Engine::toLowerCase(scene->getName()) == noun)
 						sceneryRoomList.push_back(scene->getName());
 				}
 
@@ -241,7 +240,7 @@ void Engine::run(Character* player, Room* currentRoom , vector<Room> allRooms, v
 							cout << "Found in Room" << endl;
 							for (DynamicItem* dItem : currentRoom->getItems())
 							{
-								if (dItem->getName() == itemRoomList[i])
+								if (Engine::toLowerCase(dItem->getName()) == itemRoomList[i])
 									dItem->print();
 							}
 							break;
@@ -261,7 +260,7 @@ void Engine::run(Character* player, Room* currentRoom , vector<Room> allRooms, v
 							cout << "Found in Inventory" << endl;
 							for (DynamicItem* dItem : player->getItemPouch())
 							{
-								if (dItem->getName() == itemInventoryList[i])
+								if (Engine::toLowerCase(dItem->getName()) == itemInventoryList[i])
 									dItem->print();
 							}
 							break;
@@ -329,9 +328,10 @@ void Engine::run(Character* player, Room* currentRoom , vector<Room> allRooms, v
 					bool findItem = false;
 					cout << "Enter name of item:";
 					cin >> viewItems;
+					viewItems = (Engine::toLowerCase(viewItems));
 					for (DynamicItem* dItem : player->getItemPouch())
 					{
-						if (dItem->getName() == viewItems)
+						if (Engine::toLowerCase(dItem->getName()) == viewItems)
 						{
 							dItem->print();
 							viewItems = true;
@@ -346,8 +346,8 @@ void Engine::run(Character* player, Room* currentRoom , vector<Room> allRooms, v
 				vector<string> itemInventoryList;
 				for (DynamicItem* dItem : player->getItemPouch())
 				{
-					if (dItem->getName() == noun)
-						itemInventoryList.push_back(dItem->getName());
+					if (Engine::toLowerCase(dItem->getName()) == noun)
+						itemInventoryList.push_back(Engine::toLowerCase(dItem->getName()));
 				}
 
 				if (itemInventoryList.size() > 0)
@@ -358,7 +358,7 @@ void Engine::run(Character* player, Room* currentRoom , vector<Room> allRooms, v
 						{
 							for (DynamicItem* dItem : player->getItemPouch())
 							{
-								if (dItem->getName() == itemInventoryList[i])
+								if (Engine::toLowerCase(dItem->getName()) == itemInventoryList[i])
 									dItem->useItem();
 							}
 							break;

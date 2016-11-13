@@ -1,3 +1,6 @@
-﻿  Engine.cpp
+﻿  Weapon.cpp
+  Room.cpp
+  Consumable.cpp
+  Generating Code...
   TextBasedEngine.vcxproj -> I:\Projects\TextBasedEngine\TextBasedEngine\Debug\TextBasedEngine.exe
   TextBasedEngine.vcxproj -> I:\Projects\TextBasedEngine\TextBasedEngine\Debug\TextBasedEngine.pdb (Partial PDB)

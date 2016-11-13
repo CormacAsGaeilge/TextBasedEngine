@@ -40,7 +40,7 @@ void Weapon::setSpeed(unsigned int speed)
 void Weapon::print()
 {
 	DynamicItem::print();
-	std::cout << "\nAttack\t" << Weapon::getAttack() << "\nDefense\t" << Weapon::getDefense() << std::endl;
+	std::cout << "Attack\t" << Weapon::getAttack() << "\nDefense\t" << Weapon::getDefense() << std::endl;
 }
 void Weapon::useItem()
 {

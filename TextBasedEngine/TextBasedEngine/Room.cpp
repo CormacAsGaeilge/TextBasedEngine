@@ -94,15 +94,15 @@ void Room::printItemNames()
 
 void Room::printScenaryNames()
 {
-	cout << "Scenary: There are " << Room::scenary.size() << "." << endl;
+	cout << "Scenery: " << Room::scenary.size() << "." << endl;
 	for (Scenary* ptr : Room::getScenary())
-		cout << "Scenary Name: " << ptr->getName() << endl;
-	cout << "******end of scenary******" << endl;
+		cout << "Scenery Name: " << ptr->getName() << endl;
+	cout << "******end of scenery******" << endl;
 }
 
 void Room::printCharacterNames()
 {
-	cout << "Characters: There are " << Room::characters.size() << "." << endl;
+	cout << "Characters: " << Room::characters.size() << "." << endl;
 	for (Character* ptr : Room::getCharacters())
 		cout << "Character Name: " << ptr->getName() << endl;
 	cout << "******end of characters******" << endl;
@@ -110,7 +110,7 @@ void Room::printCharacterNames()
 
 void Room::printConnectedRoomNames()
 {
-	cout << "Connecting rooms: There are " << Room::items.size() << "." << endl;
+	cout << "Connecting rooms: " << Room::connectedRooms.size() << "." << endl;
 	for (ConnectedRoom cRoom : Room::getConnectedRooms())
 		cout << "There is a room due " << cRoom.directionToString() <<"."<< endl;
 	cout << "******end of connecting rooms******" << endl;

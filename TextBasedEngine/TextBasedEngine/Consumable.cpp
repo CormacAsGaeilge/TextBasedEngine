@@ -34,7 +34,7 @@ void Consumable::setEffectValue(int effectValue)
 void Consumable::print()
 {
 	DynamicItem::print();
-	std::cout << "\nConsumableType\t" << Consumable::getConsumableType() << "\nEffect Value\t" << Consumable::getEffectValue()<<std::endl;
+	std::cout << "ConsumableType\t" << Consumable::getConsumableType() << "\nEffect Value\t" << Consumable::getEffectValue()<<std::endl;
 }
 void Consumable::useItem()
 {

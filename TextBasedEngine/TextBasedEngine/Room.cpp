@@ -17,6 +17,15 @@ Room::Room(unsigned int id, string name, string description, vector<DynamicItem*
 
 Room::~Room()
 {
+	/*for (DynamicItem* ptr : Room::items)
+		delete ptr;
+	items.clear();
+	for (Character* ptr : Room::characters)
+		delete ptr;
+	characters.clear();
+	for (Scenary* ptr : Room::scenary)
+		delete ptr;
+	scenary.clear();*/
 }
 
 void Room::setItems(vector<DynamicItem*> items)
@@ -97,8 +106,19 @@ void Room::removeCharacter(unsigned int characterId)
 	for (size_t i=0; i<size; i++)
 	{
 		if (Room::characters[i]->getId() == characterId)
-			Room::characters.erase(Room::characters.begin()+i);
+		{
+			Room::characters.erase(Room::characters.begin() + i);
+			i++;
+		}
 	}
+
+	/*int i = 0;
+	for (Character* c : Room::characters)
+	{
+		if (Room::characters[i]->getId() == characterId)
+			Room::characters.erase(Room::characters.begin() + i);
+		i++;
+	}*/
 }
 void Room::removeItem(unsigned int itemId)
 {

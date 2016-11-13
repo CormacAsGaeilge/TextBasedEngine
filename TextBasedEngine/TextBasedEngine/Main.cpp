@@ -51,11 +51,12 @@ bool checkIfRoom(vector<Room> allRooms, string noun);
 bool checkIfScenary(Room& currentRoom, string noun);
 bool checkIfItem(Room& currentRoom, string noun);
 bool checkIfCharacter(Room& currentRoom, string noun);
+bool checkIfDirection(string s);
 
 DirectionType getDirection(int x);
 DirectionType getDirection(string s);
 
-vector<Room> loadGameFromFile();
+void loadGameFromFile(vector<Room>& allRooms);
 string toLowerCase(string s);
 
 size_t getRoomIdWithPlayer(vector<Room>& allRooms);
@@ -74,7 +75,9 @@ int main()
 {
 	#pragma region Test
 
-	vector<Room> allRooms = loadGameFromFile();
+	vector<Room> allRooms;
+		
+	loadGameFromFile(allRooms);
 	//allRooms[0].print();
 	Room *currentRoom = &allRooms[getRoomIdWithPlayer(allRooms)];
 	//currentRoom->print();
@@ -104,7 +107,7 @@ int main()
 		noun = toLowerCase(noun);
 		if (verb == "go")
 		{
-			if (checkIfRoom(allRooms, noun))
+			if (checkIfDirection(noun))
 			{
 
 				DirectionType dir = getDirection(noun);
@@ -119,15 +122,21 @@ int main()
 						numOfRooms++;
 						connectedRoomIds.push_back(&cR);
 					}
+					else
+						cout << "test" << endl;
 				}
 				if (numOfRooms == 0)
-					cout << "No rooms in that direction" << endl;
+					cout << "No rooms due " << noun << "." << endl;
 				else if (numOfRooms == 1)
 				{
 					for (ConnectedRoom cR : currentRoom->getConnectedRooms())
 					{
 						if (cR.getDirection() == dir)
+						{
 							changeRoom(allRooms, currentRoom->getId(), cR.getRoomId(), dir);
+							currentRoom = &allRooms[cR.getRoomId()];
+							cout << "You are now in " << currentRoom->getName() <<"." << endl;
+						}
 					}
 				}
 				else
@@ -191,14 +200,69 @@ int main()
 		}
 		else if (verb == "help")
 		{
-			cout << "Keywords:" << endl;
-			cout << "Go ...\nPickup ...\nLookat ...\nUse ...\nView ..." << endl;
-			cout << "Directions:" << endl;
-			cout << "North\nWest\nEast\nSouth\nNorthWest\nNorthEast\nSouthWest\nSouthEast" << endl;
+			if (noun == "controls")
+			{
+				cout << "Keywords:" << endl;
+				cout << "Go ...\nPickup ...\nLookat ...\nUse ...\nView ..." << endl;
+				cout << "Directions:" << endl;
+				cout << "North\nWest\nEast\nSouth\nNorthWest\nNorthEast\nSouthWest\nSouthEast" << endl;
+			}
+			else if (noun == "rooms")
+			{
+				//write info about rooms and what kind of interactions can be made
+				cout << "rooms..." << endl;
+			}
+			else if (noun == "items")
+			{
+				//write info about items and what kind of interactions can be made
+				cout << "items..." << endl;
+			}
+			else if (noun == "characters")
+			{
+				//write info about characters and what kind of interactions can be made
+				cout << "characters..." << endl;
+			}
+			else if (noun == "scenary")
+			{
+				//write info about scenary and what kind of interactions can be made
+				cout << "scenary..." << endl;
+			}
+			else
+			{
+				cout << "After the word help type one of the following for more information.\ncontrols\nrooms\nitems\ncharacters\nscenary" << endl;
+			}
+		}
+		else if (verb == "settings")
+		{
+			if (noun == "quit")
+			{
+				string quit;
+				cout << "Progress will not be saved. IF you wish to save type 'settings save'. Are you sure you wish to quit? [y/n]" << endl;
+				cin >> quit;
+				if (quit == "y")
+				{
+					cout << "Game Has Ended" << endl;
+					check = 1;
+				}
+				else
+					cout << "canceled quiting" << endl;
+			}
+			else if (noun == "save")
+			{
+				//implement save to file
+			}
+			else if (noun == "load")
+			{
+				//implement load from file
+			}
+			else
+			{
+				cout << "Enter one of the following settings commands:-\nquit\nsave\nload" << endl;
+			}
 		}
 		else
 		{
-			
+			cout << "No valid verb. Type 'help controls' for a list of all commands" << endl;
 		}
 	}
 
@@ -237,6 +301,28 @@ bool checkIfRoom(vector<Room> allRooms, string noun)
 	return false;
 }
 
+bool checkIfDirection(string s)
+{
+	if (s == "north")
+		return true;
+	else if (s == "northeast")
+		return NorthEast;
+	else if (s == "east")
+		return true;
+	else if (s == "southeast")
+		return SouthEast;
+	else if (s == "south")
+		return true;
+	else if (s == "southwest")
+		return true;
+	else if (s == "west")
+		return true;
+	else if (s == "northwest")
+		return true;
+	else
+		return false;
+}
+
 size_t getRoomIdWithPlayer(vector<Room>& allRooms)
 {
 	size_t size = allRooms.size();
@@ -244,7 +330,7 @@ size_t getRoomIdWithPlayer(vector<Room>& allRooms)
 	{
 		Character* c;
 		c = getPlayer(allRooms[i]);
-		if (c != NULL)
+		if (&c != NULL)
 			return i;
 	}
 	return NULL;
@@ -566,10 +652,10 @@ Scenary* createScenary(unsigned int id, std::string name, std::string descriptio
 
 #pragma region loadGame
 
-vector<Room> loadGameFromFile()
+void loadGameFromFile(vector<Room>& allRooms)
 {
 	stringstream ss;
-	unsigned int roomId = 0;
+	unsigned int roomId;
 	string name;
 	string description;
 	string itemsString;
@@ -577,7 +663,6 @@ vector<Room> loadGameFromFile()
 	string sceneString;
 	string cRoomString;
 
-	vector<Room> allRooms;
 
 	/******************************Code by Maik Beckmann from http://stackoverflow.com/questions/2912520/read-file-contents-into-a-string-in-c *********************************/
 
@@ -593,8 +678,8 @@ vector<Room> loadGameFromFile()
 		vector<string> roomVar = split(s, "-");
 		//Break down Room
 
-		ss >> roomVar[0];
-		ss << roomId;
+		ss << roomVar[0];
+		ss >> roomId;
 		ss.clear();
 		name = roomVar[1];
 		description = roomVar[2];
@@ -629,8 +714,6 @@ vector<Room> loadGameFromFile()
 	}
 
 	inFile.close();
-
-	return allRooms;
 }
 
 #pragma endregion

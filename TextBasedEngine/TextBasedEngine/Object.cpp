@@ -21,7 +21,8 @@ Object::~Object()
 
 void Object::setId(unsigned int id)
 {
-	Object::id = (id > 0) ? id : 1;
+	//Object::id = (id > -1) ? id : 0;
+	Object::id = id;
 }
 
 void Object::setName(std::string name)

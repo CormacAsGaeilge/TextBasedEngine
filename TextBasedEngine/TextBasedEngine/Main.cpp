@@ -282,10 +282,16 @@ int main()
 			else
 			{
 				vector<string> itemRoomList;
+				vector<string> itemInventoryList;
 				for (DynamicItem* dItem : currentRoom->getItems())
 				{
 					if (dItem->getName() == noun)
 						itemRoomList.push_back(dItem->getName());
+				}
+				for (DynamicItem* dItem : player->getItemPouch())
+				{
+					if (dItem->getName() == noun)
+						itemInventoryList.push_back(dItem->getName());
 				}
 
 				vector<string> characterRoomList;
@@ -302,15 +308,36 @@ int main()
 						sceneryRoomList.push_back(scene->getName());
 				}
 
-				if (itemRoomList.size() > 0) 
+				if (itemRoomList.size() > 0)
 				{
 					for (size_t i = 0; i < itemRoomList.size(); i++)
 					{
 						if (noun == itemRoomList[i])
 						{
+							cout << "Found in Room" << endl;
 							for (DynamicItem* dItem : currentRoom->getItems())
 							{
 								if (dItem->getName() == itemRoomList[i])
+									dItem->print();
+							}
+							break;
+						}
+						else {
+							cout << "There is no such item here" << endl;
+							break;
+						}
+					}
+				}
+				else if (itemInventoryList.size() > 0)
+				{
+					for (size_t i = 0; i < itemInventoryList.size(); i++)
+					{
+						if (noun == itemInventoryList[i])
+						{
+							cout << "Found in Inventory" << endl;
+							for (DynamicItem* dItem : player->getItemPouch())
+							{
+								if (dItem->getName() == itemInventoryList[i])
 									dItem->print();
 							}
 							break;
@@ -424,7 +451,14 @@ int main()
 		}
 		else if (verb == "view")
 		{
-		
+			if (noun == "health")
+			{
+
+			}
+			else if (noun == "wallet")
+			{
+
+			}
 		}
 		else if (verb == "help")
 		{

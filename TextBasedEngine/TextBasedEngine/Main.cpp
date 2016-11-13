@@ -69,8 +69,8 @@ void changeRoom(vector<Room>& allRooms, unsigned int currentRoomId, unsigned int
 /***Referenced Code Start***/
 bool to_bool(string str);
 vector<string> split(string data, string delimiter);
-
 /***Referenced Code End***/
+
 #pragma endregion
 
 #pragma region Main Game
@@ -93,11 +93,12 @@ int main()
 
 	#pragma endregion		
 
-	#pragma region Directions
+	#pragma region Gameplay
 
 	int check = 0;
 	string verb, noun;
-	
+	cout << "Type 'Help Me' for a list of commands" << endl;
+
 	while (check != 1)
 	{
 		cout << "Enter your command: ";
@@ -172,7 +173,8 @@ int main()
 				if (noun == itemRoomList[i])
 				{
 					cout << "The " << noun << " was added to your inventory" << endl;
-					//need to push item to character item pounc
+					//need to push item to character item pouch
+					
 					break;
 				}
 				else
@@ -198,7 +200,7 @@ int main()
 		{
 			cout << "Keywords:" << endl;
 			cout << "Go ...\nPickup ...\nLookat ...\nUse ...\nView ..." << endl;
-			cout << "Directions:" << endl;
+			cout << "\nDirections:" << endl;
 			cout << "North\nWest\nEast\nSouth\nNorthWest\nNorthEast\nSouthWest\nSouthEast" << endl;
 		}
 		else
